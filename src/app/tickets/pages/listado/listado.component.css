@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+/* Order */
+@layer reset, primeng;
+
+/* Reset CSS */
+/* Reset CSS */
+@layer reset {
+
+  button,
+  table,
+  input {
+    /* CSS to Reset */
+  }
+}
+
+::ng-deep .p-datatable .p-datatable-tbody>tr>td {
+  padding: 0.4rem;
+
+}
+
+::ng-deep .p-datatable-wrapper {
+
+  height: calc(80vh) !important;
+}
+
+
+@media (max-width: 600px) {
+  ::ng-deep .p-paginator-bottom {
+    display: none !important;
+  }
+
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0rem;  
+  padding:  0.5rem;  
+  margin-right: 1rem;
+  
+  
+}
+:host ::ng-deep .p-datatable >td {
+  font-size: 5px;
+}
+::ng-deep  .p-inputtext {
+  padding: 0.2rem 0.4rem;
+  
+  @apply text-sm  ;
+  
+
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+  padding: 0.4rem 0.9rem;
+}
+

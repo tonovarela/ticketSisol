@@ -1,0 +1,24 @@
+<div class="bg-gray-100 font-family-karla flex">
+   
+  <app-sidebar></app-sidebar>
+    <div  class="relative w-full flex flex-col h-screen overflow-y-hidden">
+      <app-header></app-header>
+    
+        <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-6">
+                <h1 class="text-3xl text-black pb-6 hidden md:hidden lg:block">Ticket SISOL</h1>
+                <router-outlet></router-outlet>
+                <!-- Content goes here! 😁 -->
+            </main>
+    
+            <footer class="sm:hidden w-full bg-white text-right p-4">
+                <p-button  icon="pi pi-plus" [rounded]="true" />
+                <!-- <button class="px-3 py-1 bg-blue-500 text-4xl align-middle text-white rounded-full">+</button> -->
+                <!-- Built by <a target="_blank" href="https://davidgrzyb.com" class="underline">David Grzyb</a>. -->
+            </footer>
+        </div>
+        
+    </div>
+    <!-- Font Awesome -->
+  </div>
+  
