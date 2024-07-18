@@ -1,16 +1,23 @@
 
-import {  Component, Input } from '@angular/core';
+import {  Component, Input, OnInit } from '@angular/core';
+import { Mensaje } from '../../../interfaces/mensaje.interface';
+import { CommonModule } from '@angular/common';
+import { PrimeModule } from '../../../lib/prime.module';
+import { SharedModule } from '../../../shared/shared.module';
+
 
 @Component({
-  selector: 'app-mensaje',  
+  standalone: true,
+  selector: 'app-mensaje',    
+  imports:[CommonModule,PrimeModule,SharedModule],  
   templateUrl: './mensaje.component.html',
-  styleUrl: './mensaje.component.css',
+   styleUrl: './mensaje.component.css',
   
 })
-export class MensajeComponent { 
+export class MensajeComponent  {
+  
 
-@Input('mensaje') mensaje: string ="";
-@Input('propio') propio:boolean = false;
-@Input('foto') foto:string = '';
+@Input('mensajeModel') mensajeModel!: Mensaje;
+
 
 }

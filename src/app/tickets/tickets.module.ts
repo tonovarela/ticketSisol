@@ -9,18 +9,27 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { MensajeComponent } from './components/mensaje/mensaje.component';
+import { BitacoraComponent } from './pages/bitacora/bitacora.component';
+import { CameraComponent } from '../icons/camera/camera.component';
+import { AttachmentComponent } from '../icons/attachment/attachment.component';
+import { MessagesComponent } from '../icons/messages/messages.component';
 
 
 
 @NgModule({
-  declarations: [
-    MensajeComponent,
+  declarations: [    
+    BitacoraComponent,
     LayoutComponent,
     ListadoComponent,
-    NuevoComponent
+    NuevoComponent,
+
   ],
   imports: [    
-    CommonModule,
+    CommonModule,    
+    MensajeComponent,
+    CameraComponent,
+    MessagesComponent,
+    AttachmentComponent,
     FormsModule,
     TicketsRoutingModule,
     SharedModule,

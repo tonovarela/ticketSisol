@@ -1,36 +1,30 @@
-
-<div >    
-
-    
-    <p-table [value]="tickets" 
-[rows]="rows"
-[(first)]="first"
-
-[paginator]="true"
-[alwaysShowPaginator]="false"
+<div>        
+    <p-table [value]="tickets"  [rows]="rows" [(first)]="first" [paginator]="true" [alwaysShowPaginator]="false"
 >
     <ng-template pTemplate="header">
         <tr>
             <th class="text-sm hidden lg:table-cell w-10 text-slate-700" >N</th>
-            <th class="text-sm w-30">Bitacora</th>
-            <th class="text-sm hidden lg:table-cell w-1">Estado</th>                        
-            <th class="text-sm min-w-40">Zona</th>
-            <th class="text-sm min-w-40">Solicita</th>
-            <th class="text-sm min-w-40">Titulo</th>
+            <th class="text-sm w-30">Mensajes</th>
+            <th class="text-sm hidden  lg:table-cell w-1">Estado</th>                        
+            <th class="text-sm min-w-[100px]">Zona</th>
+            <th class="text-sm min-w-[150px]">Solicita</th>
+            <th class="text-sm min-w-[200px]">Titulo</th>
             <th class="text-sm hidden lg:table-cell  w-15">Registro</th>            
             <th class="text-sm hidden lg:table-cell  w-15">Max respuesta</th>
             <th class="text-sm hidden lg:table-cell  w-15">Categoria</th>
             <th class="text-sm hidden lg:table-cell  w-15">Es queja</th>
             <th class="text-sm hidden lg:table-cell  w-30">Asignado</th>            
             <th class="text-sm hidden lg:table-cell  w-25">Compromiso</th>
-            <th class="text-sm  w-50">Situacion</th>
+            <th class="text-sm min-w-[100px] ">Situacion</th>
             
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-ticket>        
         <tr >
             <td class="text-sm hidden lg:table-cell">{{ ticket.id_ticket }}</td>
-            <td >---</td>
+            <td class="flex justify-center">
+                <app-messages-icon routerLink="/tickets/bitacora/5"/>
+            </td>
             <td class="hidden lg:table-cell ">                
                 <p-dropdown 
     [options]="estados"  
@@ -53,14 +47,15 @@
             
             <td class="text-sm">{{ ticket.zona }}</td>
             <td class="text-sm">{{ ticket.solicitante }}</td>
-            <td class="text-sm">{{ ticket.titulo }}</td>
+            <td class="text-sm ">{{ ticket.titulo }}</td>
             <td class="text-sm hidden lg:table-cell">{{ ticket.registro | date:'dd-MM-YYYY'}}</td>            
             <td class="text-sm hidden lg:table-cell">{{ ticket.fecha_respuesta |  date:'dd-MM-YYYY' }}</td>
             <td class="text-sm hidden lg:table-cell">{{ ticket.categoria }}</td>
             <td class="text-sm hidden lg:table-cell">{{ ticket.es_queja }}</td>
             <td class="text-sm hidden lg:table-cell">{{ ticket.asignado}}</td>                    
             <td class="text-sm hidden lg:table-cell">{{ ticket.compromiso}}</td>
-            <td class="text-sm ">
+            <td class="text-sm  ">
+                
                 <span class="inline-flex items-center rounded-md bg-emerald-100 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{ticket.situacion}}</span>                                
             
             

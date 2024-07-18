@@ -1,0 +1,60 @@
+<div class="flex h-screen antialiased text-slate-800">
+  <div class="absolute top-0 left-0 z-50 w-full   bg-black/75 text-white px-2 ">
+    <div class="py-2">
+      <div class="gap-3 flex">
+        <button routerLink="/tickets/listado" type="button"
+          class="  inline-flex items-center justify-center text-white hover:text-blue-500 ">
+          <i class="pi pi-chevron-left"></i>
+        </button>
+        <app-avatar  username="Varela"></app-avatar>
+      </div>
+
+    </div>
+  </div>
+  <div class="flex flex-row h-full w-full overflow-x-hidden">
+    <div class="flex flex-col flex-auto h-full ">
+      <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full ">
+        <div id="bottom" class="flex flex-col h-full overflow-x-auto ">
+          <div class="pt-20">
+            @for(mensaje of mensajes();track $index) {
+            <app-mensaje [mensajeModel]="mensaje"></app-mensaje>
+            }
+          </div>
+
+        </div>
+        <div class="flex flex-row items-center h-16  bg-gray-600/10 w-full px-4">
+          <div class="flex space-x-2 mr-1">
+            @if(!isMobile){
+            <button (click)="fileRef.click()" class="text-gray-400 hover:text-gray-600 rounded-lg ">
+              <i class="pi pi-paperclip"></i>
+            </button>
+            }
+            @else{
+              <div class="flex gap-3">
+                <button routerLink="/tickets/listado" class="text-gray-400 hover:text-gray-600 rounded-lg ">
+                  <i class="pi pi-chevron-left"></i>
+                </button>
+              <button (click)="cameraRef.click()"
+                class="flex items-center justify-center text-gray-400 hover:text-gray-600">
+                <app-camera-icon />
+              </button>
+
+              </div>
+              
+
+            }
+          </div>
+          <div class="flex-grow ml-1">
+            <div class="relative w-full">
+              <input type="text" (keyup)="onKeyUp($event)" [(ngModel)]="nuevoMensaje"
+                class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300  h-10 px-2" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" #cameraRef id="camera" (change)="importarArchivo($event)" capture="environment" accept="image/*"
+  class="hidden">
+<input type="file" #fileRef (change)="importarArchivo($event)" id="attachment" class="hidden">
