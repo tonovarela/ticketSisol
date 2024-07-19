@@ -29,8 +29,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(({ id_ticket }) => {
-      console.log(id_ticket);
+    this.activatedRoute.params.subscribe(({ id_ticket }) => {      
       this.cargarMensajes();      
     });
 

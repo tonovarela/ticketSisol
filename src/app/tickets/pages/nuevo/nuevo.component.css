@@ -1,3 +1,23 @@
 :host {
   display: block;
 }
+
+::ng-deep  .p-inputtext {
+  /* padding: 0.2rem 0.4rem;   */
+  @apply text-sm  text-gray-600;
+  
+  
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+  padding: 0.4rem 0.9rem;
+}
+
+
+.campo-con-errores {
+  @apply border-red-500 placeholder:text-red-400 focus:placeholder:text-gray-400
+}
+
+::ng-deep p-dropdown.ng-invalid.ng-touched  .p-dropdown-label {  
+  @apply text-red-400 text-sm
+}

@@ -2,11 +2,6 @@
 import { Component } from '@angular/core';
 import { Ticket } from '../../../interfaces/ticket.interface';
 
-
-interface City {
-  name: string;
-  code: string;
-}
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -26,10 +21,10 @@ export class ListadoComponent {
   visible: boolean = false;
 
   public tickets: Ticket[] = [
-    {id_estado:1,id_ticket: '1', zona: 'Zona 1', solicitante: 'Juan Perez', titulo: 'Problema con el internet', registro: new Date(), dias_respuesta: 2, fecha_respuesta: new Date(), categoria: 'Internet', es_queja: false, asignado: 'Pedro', compromiso: 'Atender', situacion: 'En proceso', estado: 'Pendiente de atender'},
-    {id_estado:1,id_ticket: '2', zona: 'Zona 2', solicitante: 'Maria Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 3, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Juan', compromiso: 'Atender', situacion: 'En proceso', estado: 'Atendiendose'},
-    {id_estado:1,id_ticket:'3', zona: 'Zona 3', solicitante: 'Pedro Perez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 4, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: false, asignado: 'Maria', compromiso: 'Atender', situacion: 'En proceso', estado: 'Cancelado'},
-    {id_estado:1,id_ticket: '4', zona: 'Zona 4', solicitante: 'Ana Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 5, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Pedro', compromiso: 'Atender', situacion: 'En proceso', estado: 'Pendiente de atender'},
+    {id_estado:1,id_ticket: '12', zona: 'Zona 1', solicitante: 'Juan Perez', titulo: 'Problema con el internet', registro: new Date(), dias_respuesta: 2, fecha_respuesta: new Date(), categoria: 'Internet', es_queja: false, asignado: 'Pedro', compromiso: 'Atender', situacion: 'En proceso', estado: 'Pendiente de atender'},
+    {id_estado:1,id_ticket: '200', zona: 'Zona 2', solicitante: 'Maria Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 3, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Juan', compromiso: 'Atender', situacion: 'En proceso', estado: 'Atendiendose'},
+    {id_estado:1,id_ticket:'388', zona: 'Zona 3', solicitante: 'Pedro Perez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 4, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: false, asignado: 'Maria', compromiso: 'Atender', situacion: 'En proceso', estado: 'Cancelado'},
+    {id_estado:1,id_ticket: '48', zona: 'Zona 4', solicitante: 'Ana Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 5, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Pedro', compromiso: 'Atender', situacion: 'En proceso', estado: 'Pendiente de atender'},
     {id_estado:1,id_ticket:'5', zona: 'Zona 5', solicitante: 'Juan Perez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 6, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: false, asignado: 'Ana', compromiso: 'Atender', situacion: 'En proceso', estado: 'Atendiendose'},
     {id_estado:1,id_ticket: '6', zona: 'Zona 6', solicitante: 'Maria Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 7, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Juan', compromiso: 'Atender', situacion: 'En proceso', estado: 'Cancelado'},
 
@@ -41,11 +36,7 @@ export class ListadoComponent {
 
 
 
-  getSeverity(status: string) {
-    return 'success';
-
-  }
-
+ 
   next() {
     this.first = this.first + this.rows;
   }
@@ -54,9 +45,9 @@ export class ListadoComponent {
     this.first = this.first - this.rows;
   }
 
-  reset() {
-    this.first = 0;
-  }
+  // reset() {
+  //   this.first = 0;
+  // }
 
   isLastPage(): boolean {
     return this.tickets ? this.first === (this.tickets.length - this.rows) : true;

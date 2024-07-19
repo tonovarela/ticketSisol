@@ -14,5 +14,25 @@ export interface Ticket {
     estado:string;
     id_estado: number;
     
-    
+}
+
+export interface SolicitudAlta {
+    id_zona:number;
+    id_categoria:number;
+    titulo:string;
+    descripcion:string;
+    esqueja:boolean;
+    id_solicitante:string;
+    archivo?:File 
+}
+
+
+export interface Zona {
+    id_zona: number;
+    descripcion: string;
+}
+
+export interface Categoria {
+    id_categoria: number;
+    descripcion: string;
 }

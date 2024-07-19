@@ -7,13 +7,14 @@ import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 
 
 const routes: Routes = [{
-  path: 'listado', component: LayoutComponent,
+  path: '', component: LayoutComponent,
   children: [
-    { path: '', component: ListadoComponent },     
+    { path: 'listado', component: ListadoComponent },     
+    { path: 'nuevo', component: NuevoComponent },
   ]
 },
 { path: 'bitacora/:id_ticket', component: BitacoraComponent },
-//{ path: 'nuevo', component: NuevoComponent },
+
 {path: '', redirectTo: 'listado', pathMatch: 'full' }
 
 

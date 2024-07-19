@@ -47,11 +47,9 @@
   font-size: 5px;
 }
 ::ng-deep  .p-inputtext {
-  padding: 0.2rem 0.4rem;
-  
+  padding: 0.2rem 0.4rem;  
   @apply text-sm  ;
   
-
 }
 
 ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{

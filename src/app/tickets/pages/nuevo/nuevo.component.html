@@ -1,1 +1,106 @@
-<h1>Trabaja</h1>
+<div class="max-w-2xl mx-auto  rounded-lg  shadow-lg border">
+    <form [formGroup]="solicitudForm" (ngSubmit)="registrarSolicitud()">
+        <h1 class="text-3xl text-black p-5"> Nueva Solicitud</h1>
+        <div class="editor mx-auto w-full flex flex-col text-gray-800 border border-gray-300 p-4 ">
+            <p-dropdown [options]="categorias" formControlName="id_categoria" placeholder="Seleccione una categoría"
+                styleClass="w-full h-10 text-gray-600    text-sm mt-2 mb-5 flex items-center"
+                [class]="campoValido('id_categoria')?'ng-dirty ng-invalid':''" optionLabel="descripcion"
+                optionValue="id_categoria">
+                <ng-template let-categoria pTemplate="item">
+                    <div class="text-sm text-gray-600">
+                        <div>{{ categoria.descripcion }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <p-dropdown [options]="zonas" placeholder="Seleccione una zona" formControlName="id_zona"
+                [class]="campoValido('id_zona')?'ng-dirty ng-invalid':''"
+                styleClass="w-full h-10 text-gray-600   text-sm mt-2 mb-5 flex items-center" optionLabel="descripcion"
+                optionValue="id_zona">
+                <ng-template let-zona pTemplate="item">
+                    <div class="flex justify-items-center  text-sm text-gray-600  ">
+                        <div>{{ zona.descripcion }}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <input formControlName="titulo" [ngClass]="{'campo-con-errores': campoValido('titulo')}"
+                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                spellcheck="false" placeholder="Título" type="text">
+            <textarea formControlName="descripcion" [ngClass]="{'campo-con-errores': campoValido('descripcion')}"
+                class="descripcion  mb-5 mt-2 
+              text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-40 flex items-center p-3 text-sm rounded border" spellcheck="false" placeholder="Descripción"></textarea>
+            <div [ngClass]="{'text-red-400': campoValido('descripcion')}"
+                class="count ml-auto text-gray-400 text-xs font-semibold">{{totalCaracteres}}/300</div>
+            <div class="flex  justify-start   space-x-3 mt-5 mb-10">
+                <p-checkbox formControlName="es_queja" [binary]="true" inputId="binary" />
+                <label class="text-sm text-gray-600" for="binary">Es queja?</label>
+            </div>
+            @if (previewUrl){
+            <div id="preview"
+                class="my-4 flex justify-center  border-dashed border-gray-300 border-2  bg-gray-200/50 p-10">
+
+                <div class="relative">
+                    @if (solicitudForm.enabled){
+                    <button type="button"  (click)="eliminarArchivo()"
+                        class="absolute p-2 -top-5  -right-5 bg-black/30 rounded-full self-center text-white   hover:bg-black">
+                        <div class="flex  justify-center ">
+                            <i class="pi pi-times"></i>
+                        </div>
+                    </button>
+                }
+                    @if (previewUrl.isImage){
+                    <img class="w-60  border-1 border-black/200  shadow-lg" [src]="previewUrl.src" />
+                    }@else{
+                    <a [href]="previewUrl.src" target="_blank"
+                        class="text-blue-500  m-5 underline">{{previewUrl.name}}</a>
+                    }
+                </div>
+            </div>
+            }
+            @else {
+
+
+
+            <!-- icons -->
+            <div
+                class="icons   border-dashed border-gray-300 border-2  flex justify-center bg-gray-200/50 p-5 text-gray-500 m-2 gap-x-3">
+                <label id="select-image">
+                    @if(isMobile){
+                    <app-camera-icon></app-camera-icon>
+                    <input hidden [disabled]="!this.solicitudForm.enabled" name="archivo"
+                        (change)="importarArchivo($event)" capture="environment" accept="image/*" type="file">
+                    }@else{
+                    <app-attachment-icon
+                        [class]="'mr-2 cursor-pointer hover:text-gray-700 border rounded-full  p-1 h-[50px]'" />
+                    <input hidden name="archivo" [disabled]="!this.solicitudForm.enabled"
+                        (change)="importarArchivo($event)" type="file">
+                    }
+                </label>
+
+            </div>
+
+            }
+            <!-- Preview image here -->
+
+            <!-- Buttons -->
+            <div class="buttons flex justify-end mt-10">
+                <button routerLink="/tickets/listado"
+                [disabled]="!solicitudForm.enabled" 
+                    class="btn border border-gray-500 p-1 px-4  cursor-pointer text-gray-500  bg-gray-100 disabled:cursor-not-allowed" >Regresar
+                </button>
+                <button type="submit" [disabled]="!solicitudForm.enabled" class="btn border border-indigo-500 p-1 px-4  cursor-pointer text-gray-200 ml-5 bg-indigo-500 disabled:cursor-not-allowed">
+
+                    @if (solicitudForm.enabled){
+                    <i class="pi pi-save"></i> Registrar
+                    }@else{
+                    <i class="pi pi-spinner pi-spin ml-2"></i> Registrando...}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<p-toast />
+
+<!-- <pre>
+    {{solicitudForm.value | json}}
+</pre> -->
