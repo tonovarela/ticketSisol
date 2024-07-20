@@ -9,7 +9,7 @@ import { Ticket } from '../../../interfaces/ticket.interface';
 })
 export class ListadoComponent {
   first = 0;
-  rows = 15;
+  rows = 5;
 
   estados = [
     { id_estado: 1, descripcion: 'Pendiente de atender' },

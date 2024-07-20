@@ -1,9 +1,11 @@
-<div>
+<div class="max-h-fit">
     <h1 class="text-3xl text-black pb-6 hidden md:hidden lg:block">Ticket SISOL</h1>
-    <div class="sm:hidden absolute bottom-0 right-0 mr-5 mb-5">
+    <div class="sm:hidden absolute bottom-20 z-50 right-0 mr-5 mb-5">
             <button pButton  routerLink="/tickets/nuevo" icon="pi pi-plus" >   </button>
     </div>
-    <p-table [value]="tickets" [rows]="rows" [(first)]="first" [paginator]="true" [alwaysShowPaginator]="false">
+    <p-table [value]="tickets" [rows]="rows" 
+    [virtualScroll]="false" 
+    [(first)]="first" [paginator]="true" [alwaysShowPaginator]="false">
         <ng-template pTemplate="header">
             <tr>
                 <th class="text-sm w-30"></th>
