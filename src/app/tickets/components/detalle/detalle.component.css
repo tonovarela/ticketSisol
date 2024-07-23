@@ -1,0 +1,9 @@
+
+
+.input-disabled {
+    @apply bg-white text-gray-500 cursor-not-allowed bg-gray-50/10;
+}
+
+.label-ticket{
+    @apply w-2/4 sm:w-2/5 font-semibold mr-2 text-sm;
+}

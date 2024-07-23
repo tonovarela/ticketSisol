@@ -6,16 +6,19 @@ import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 
 
-const routes: Routes = [{
+const routes: Routes = [
+  { path: 'bitacora/:id_ticket', component: BitacoraComponent },  
+  {
   path: '', component: LayoutComponent,
   children: [
-    { path: 'listado', component: ListadoComponent },     
+    { path: 'listado', component: ListadoComponent },
     { path: 'nuevo', component: NuevoComponent },
-  ]
+    
+    { path: '**', redirectTo: 'listado' }
+  ]  
 },
-{ path: 'bitacora/:id_ticket', component: BitacoraComponent },
 
-{path: '', redirectTo: 'listado', pathMatch: 'full' }
+
 
 
 ];

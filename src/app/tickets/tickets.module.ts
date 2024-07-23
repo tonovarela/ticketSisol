@@ -14,6 +14,7 @@ import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 import { CameraComponent } from '../icons/camera/camera.component';
 import { AttachmentComponent } from '../icons/attachment/attachment.component';
 import { MessagesComponent } from '../icons/messages/messages.component';
+import { DetalleComponent } from './components/detalle/detalle.component';
 
 
 
@@ -29,7 +30,7 @@ import { MessagesComponent } from '../icons/messages/messages.component';
   imports: [    
     CommonModule,    
     MensajeComponent,    
-    
+    DetalleComponent,    
     CameraComponent,
     MessagesComponent,
     AttachmentComponent,

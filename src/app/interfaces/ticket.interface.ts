@@ -5,11 +5,10 @@ export interface Ticket {
     titulo:string;
     registro: Date;
     dias_respuesta: number;
-    fecha_respuesta: Date;
+    fecha_respuesta?: Date;
     categoria: string;
     es_queja: boolean;
-    asignado: string;
-    compromiso:string;
+    asignado: string;    
     situacion: string;
     estado:string;
     id_estado: number;
@@ -24,6 +23,10 @@ export interface SolicitudAlta {
     esqueja:boolean;
     id_solicitante:string;
     archivo?:File 
+}
+export interface Estado{
+    id_estado: number;
+    descripcion: string;
 }
 
 
