@@ -1,11 +1,12 @@
 
 import { Component, inject, OnInit } from '@angular/core';
-import { Categoria, Zona } from '../../../interfaces/ticket.interface';
+import { Categoria, Ticket, Zona } from '../../../interfaces/ticket.interface';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { isMobile } from '../../../utils/mobileDetector';
 
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { TicketService } from '../../../services/ticket.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class NuevoComponent implements OnInit {
   previewUrl: { src: string, name: string, isImage: boolean } | null = null;
   fb = inject(FormBuilder);
   messageService = inject(MessageService);
+  ticketService = inject(TicketService);
   router = inject(Router);
 
   ngOnInit(): void {
@@ -57,17 +59,34 @@ export class NuevoComponent implements OnInit {
   }
 
   async registrarSolicitud() {
-
     this.solicitudForm.markAllAsTouched();
-    if (this.solicitudForm.invalid) {
-      console.log('Formulario invalido');
+    if (this.solicitudForm.invalid) {      
       return;
     }
+    const ticket :Ticket ={
+      id_ticket: 'XXX',
+      zona: "Zona 6",
+      //this.solicitudForm.get('id_zona')!.value!,
+      solicitante: "Marco Estelles",
+      //this.solicitudForm.get('id_solicitante')!.value!,
+      titulo: this.solicitudForm.get('titulo')!.value!,
+      registro: new Date(),
+      dias_respuesta: 0,
+      categoria: "Varela",
+      //this.solicitudForm.get('id_categoria')!.value!,
+      es_queja: this.solicitudForm.get('es_queja')!.value!,
+      asignado: '',
+      situacion: 'En proceso',
+      estado: 'Pendiente de atender',
+      id_estado: 1
+    };
+    this.ticketService.registrar(ticket);
     this.solicitudForm.disable();
     const promise = new Promise((resolve, reject) => setTimeout(() => {
       resolve(true);
-    }, 5000));
+    }, 1000));
     await promise;
+    
     this.messageService.add({ severity: 'success', summary: 'Listo', detail: 'Solicitud registrada', life: 3000 })
     this.solicitudForm.enable();
     this.solicitudForm.reset();

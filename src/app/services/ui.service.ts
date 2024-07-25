@@ -1,14 +1,18 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiService {
 
-  private menuStatus = false;
+  private menuStatus = false;  
 
-  constructor() { }
+  constructor() {
+   
+   }
 
+   
 
   toggleMenu() {
     this.menuStatus = !this.menuStatus;

@@ -1,18 +1,23 @@
 
-import { Component } from '@angular/core';
+import {  Component, inject, OnInit } from '@angular/core';
 import { Estado, Ticket } from '../../../interfaces/ticket.interface';
+import { TicketService } from '../../../services/ticket.service';
 
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrl: './listado.component.css',
+  styleUrl: './listado.component.css',  
 })
-export class ListadoComponent {
+export class ListadoComponent implements OnInit {  
+  ngOnInit(): void {    
+    
+  } 
+  
   first = 0;
-  rows = 5;
-
+  rows = 10;  
   verDetalleTicket: boolean = false;
   ticketDetalle:Ticket| undefined;
+  ticketService = inject(TicketService);
 
   estados :Estado[]= [
     { id_estado: 1, descripcion: 'Pendiente de atender' },
@@ -20,26 +25,8 @@ export class ListadoComponent {
     { id_estado: 3, descripcion: 'Cancelado' },
   ];
 
+  
 
-  visible: boolean = false;
-
-  public tickets: Ticket[] = [
-    {id_estado:1,id_ticket: '12', zona: 'Zona 1', solicitante: 'Juan Perez', titulo: 'Problema con el internet', registro: new Date(), dias_respuesta: 2, fecha_respuesta: new Date(), categoria: 'Internet', es_queja: false, asignado: 'Pedro', situacion: 'En proceso', estado: 'Pendiente de atender'},
-    {id_estado:1,id_ticket: '200', zona: 'Zona 2', solicitante: 'Maria Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 3, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Juan',  situacion: 'En proceso', estado: 'Atendiendose'},
-    {id_estado:1,id_ticket:'388', zona: 'Zona 3', solicitante: 'Pedro Perez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 4, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: false, asignado: 'Maria',  situacion: 'En proceso', estado: 'Cancelado'},
-    {id_estado:1,id_ticket: '48', zona: 'Zona 4', solicitante: 'Ana Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 5, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Pedro',  situacion: 'En proceso', estado: 'Pendiente de atender'},
-    {id_estado:1,id_ticket:'5', zona: 'Zona 5', solicitante: 'Juan Perez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 6, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: false, asignado: 'Ana',  situacion: 'En proceso', estado: 'Atendiendose'},
-    {id_estado:1,id_ticket: '6', zona: 'Zona 6', solicitante: 'Maria Lopez', titulo: 'Problema con el telefono', registro: new Date(), dias_respuesta: 7, fecha_respuesta: new Date(), categoria: 'Telefono', es_queja: true, asignado: 'Juan',  situacion: 'En proceso', estado: 'Cancelado'},
-
-    
-
-
-  ];
-
-
-
-
- 
   next() {
     this.first = this.first + this.rows;
   }
@@ -48,16 +35,13 @@ export class ListadoComponent {
     this.first = this.first - this.rows;
   }
 
-  // reset() {
-  //   this.first = 0;
-  // }
-
+  
   isLastPage(): boolean {
-    return this.tickets ? this.first === (this.tickets.length - this.rows) : true;
+    return this.ticketService.Tickets() ? this.first === (this.ticketService.Tickets().length - this.rows) : true;
   }
 
   isFirstPage(): boolean {
-    return this.tickets ? this.first === 0 : true;
+    return this.ticketService.Tickets() ? this.first === 0 : true;
   }
 
 

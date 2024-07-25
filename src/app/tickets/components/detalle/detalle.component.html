@@ -1,5 +1,6 @@
 <div class="w-full mt-2 space-y-4 max-w-md mx-auto">
     <h1 class="text-2xl">Folio {{ticket.id_ticket}}</h1>
+    
     <div class="flex  flex-col sm:flex-row ">
         <label for="estado" class="label-ticket ">Estado</label>
         <span class="w-full">
@@ -14,6 +15,21 @@
         </span>
 
         <!-- <input pInputText id="estado" class="w-full input-disabled"  autocomplete="off" /> -->
+    </div>
+    <div class="flex  flex-col sm:flex-row  ">
+        <label for="compromiso" class="label-ticket ">Compromiso</label>    
+        <input type="date"
+        onfocus="this.showPicker()"     
+        [min]="today"   
+        onkeydown="return false"
+        [(ngModel)]="ticket.fecha_respuesta"
+         id="compromiso" class="peer h-full w-full rounded-[7px] border border-blue-gray-200  
+         bg-transparent px-2 py-1 font-sans text-sm font-normal 
+         text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2
+         focus:border-blue-900
+         focus:outline-0 
+         disabled:border-0 
+         disabled:bg-blue-gray-50"  />
     </div>
     <div class="flex    flex-col sm:flex-row gap-1 ">
         <label for="zona" class="label-ticket">Zona</label>
@@ -34,22 +50,7 @@
         <input pInputText id="asignado" class="w-full input-disabled" [value]="ticket.asignado" disabled
             autocomplete="off" />
     </div>
-    <div class="flex  flex-col sm:flex-row  ">
-        <label for="compromiso" class="label-ticket ">Compromiso</label>
     
-        <input type="date"
-        onfocus="this.showPicker()"     
-        [min]="today"   
-        onkeydown="return false"
-        [(ngModel)]="ticket.fecha_respuesta"
-         id="compromiso" class="peer h-full w-full rounded-[7px] border border-blue-gray-200  
-         bg-transparent px-2 py-1 font-sans text-sm font-normal 
-         text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2
-         focus:border-blue-900
-         focus:outline-0 
-         disabled:border-0 
-         disabled:bg-blue-gray-50"  />
-    </div>
 
 
     <div class="flex justify-end  pt-20 space-x-4">
