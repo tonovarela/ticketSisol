@@ -1,6 +1,6 @@
 
 import {  Component, inject, OnInit } from '@angular/core';
-import { Estado, Ticket } from '../../../interfaces/ticket.interface';
+import { Estado, OnUpdateTicketModel, Ticket } from '../../../interfaces/ticket.interface';
 import { TicketService } from '../../../services/ticket.service';
 
 @Component({
@@ -14,18 +14,11 @@ export class ListadoComponent implements OnInit {
   } 
   
   first = 0;
-  rows = 10;  
-  verDetalleTicket: boolean = false;
+  rows = 10;    
   ticketDetalle:Ticket| undefined;
   ticketService = inject(TicketService);
 
-  estados :Estado[]= [
-    { id_estado: 1, descripcion: 'Pendiente de atender' },
-    { id_estado: 2, descripcion: 'Atendiendose' },
-    { id_estado: 3, descripcion: 'Cancelado' },
-  ];
-
-  
+  estados = this.ticketService.estados;  
 
   next() {
     this.first = this.first + this.rows;
@@ -46,15 +39,15 @@ export class ListadoComponent implements OnInit {
 
 
   verDetalle(ticket:Ticket){
-    this.verDetalleTicket = true;    
+    //this.verDetalleTicket = true;    
     this.ticketDetalle=ticket
   }
 
-  actualizarTicket(ticket:Ticket){
-    console.log('Actualizar ticket', ticket); 
+  actualizarTicket({ticket,cambioFechaCompromiso}:OnUpdateTicketModel){   
+    this.ticketService.actualizar(ticket);
+    this.ticketDetalle = undefined;
   }
-  cerrarDetalle(){
-    console.log('Cerrar detalle');
+  cerrarDetalle(){    
     this.ticketDetalle=undefined;
   }
 

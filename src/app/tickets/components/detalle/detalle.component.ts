@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, signal, effect } from '@angular/core';
 import { PrimeModule } from '../../../lib/prime.module';
-import { Estado, Ticket } from '../../../interfaces/ticket.interface';
+import { Estado, OnUpdateTicketModel, Ticket } from '../../../interfaces/ticket.interface';
 import { FormsModule } from '@angular/forms';
+
 
 @Component({
   standalone: true,
@@ -14,21 +15,39 @@ import { FormsModule } from '@angular/forms';
 })
 export class DetalleComponent implements OnInit {
   today=new Date().toISOString().split('T')[0];
-  ngOnInit(): void {
-    console.log(this.ticket);
+  ticket!:Ticket;
+  estados= signal<Estado[]>([]);
+  cambioFechaCompromiso = false;
+  ngOnInit(): void {    
+    this.ticket = {...this.ticketParam};    
+    this.setEstados(this.ticket.fecha_respuesta!=undefined);    
   }
-  @Input('catalogoEstados') estados: Estado[] = [];
-  @Input('ticket') ticket!: Ticket;
+  @Input('catalogoEstados') catalogoEstados: Estado[] = [];
+  @Input('ticket') ticketParam!: Ticket;
   @Output('onClose') onClose = new EventEmitter<void>();
-  @Output('onUpdate') onUpdate = new EventEmitter<Ticket>();
-  
+  @Output('onUpdate') onUpdate = new EventEmitter<OnUpdateTicketModel>();
 
-  constructor() {
-    console.log(this.today);
+  onDateChange(event:string) {    
+    let cambioFechaCompromiso = this.ticket.fecha_respuesta!=undefined && event.length>0;
+    this.cambioFechaCompromiso = cambioFechaCompromiso;    
+    this.setEstados(event.length>0);    
   }
+
+  private setEstados(tieneFecha:boolean=false){
+      if (!tieneFecha && this.ticket.id_estado!=3){      
+        this.ticket.id_estado=1;
+        this.estados.set(this.catalogoEstados.filter(e=>e.id_estado==3 || e.id_estado==1));
+      }else{
+        this.estados.set(this.catalogoEstados);
+      }                
+  }
+  
   onKey(key:Event){
-    this.ticket.fecha_respuesta = undefined;
-    console.log("key pressed");
+    this.ticket!.fecha_respuesta = undefined;    
   }
+  actualizar() {    
+    this.onUpdate.emit({ticket:this.ticket,cambioFechaCompromiso:this.cambioFechaCompromiso});
+  }
+  
 
 }

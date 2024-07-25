@@ -1,6 +1,6 @@
 
 import { Component, inject, OnInit } from '@angular/core';
-import { Categoria, Ticket, Zona } from '../../../interfaces/ticket.interface';
+import { Ticket } from '../../../interfaces/ticket.interface';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { isMobile } from '../../../utils/mobileDetector';
 
@@ -27,18 +27,9 @@ export class NuevoComponent implements OnInit {
   }
 
   
-  public categorias: Categoria[] = [
-    { id_categoria: 1, descripcion: 'Internet' },
-    { id_categoria: 2, descripcion: 'Telefono' },
-    { id_categoria: 3, descripcion: 'Cable' },
-    { id_categoria: 4, descripcion: 'Otros' }
-  ];
-  public zonas: Zona[] = [
-    { id_zona: 1, descripcion: 'Zona 1' },
-    { id_zona: 2, descripcion: 'Zona 2' },
-    { id_zona: 3, descripcion: 'Zona 3' },
-    { id_zona: 4, descripcion: 'Zona 4' }
-  ];
+  public categorias= this.ticketService.categorias;
+  public zonas= this.ticketService.zonas;
+
   public isMobile = isMobile();
 
   solicitudForm = this.fb.group({
@@ -65,19 +56,15 @@ export class NuevoComponent implements OnInit {
     }
     const ticket :Ticket ={
       id_ticket: 'XXX',
-      zona: "Zona 6",
-      //this.solicitudForm.get('id_zona')!.value!,
-      solicitante: "Marco Estelles",
-      //this.solicitudForm.get('id_solicitante')!.value!,
+      zona: this.zonas.find(z=>z.id_zona.toString()==this.solicitudForm.get('id_zona')!.value!)?.descripcion!,
+      solicitante: "Marco Estelles",      
       titulo: this.solicitudForm.get('titulo')!.value!,
       registro: new Date(),
       dias_respuesta: 0,
-      categoria: "Varela",
-      //this.solicitudForm.get('id_categoria')!.value!,
+      categoria:this.categorias.find(c=>c.id_categoria.toString()==this.solicitudForm.get('id_categoria')!.value!)?.descripcion!,
       es_queja: this.solicitudForm.get('es_queja')!.value!,
-      asignado: '',
-      situacion: 'En proceso',
-      estado: 'Pendiente de atender',
+      asignado: '---',
+      situacion: 'En proceso',      
       id_estado: 1
     };
     this.ticketService.registrar(ticket);
@@ -91,11 +78,9 @@ export class NuevoComponent implements OnInit {
     this.solicitudForm.enable();
     this.solicitudForm.reset();
     this.previewUrl = null;
-    this.router.navigate(['/tickets/listado']);
-    
+    this.router.navigate(['/tickets/listado']);    
 
   }
-
 
   campoValido(nombreCampo: string) {
     if (this.solicitudForm.get(nombreCampo) == null) {
@@ -103,7 +88,6 @@ export class NuevoComponent implements OnInit {
     }
     return this.solicitudForm.get(nombreCampo)!.invalid
       && this.solicitudForm.get(nombreCampo)!.touched
-
   }
 
   importarArchivo(event: Event) {

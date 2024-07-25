@@ -10,7 +10,7 @@ export interface Ticket {
     es_queja: boolean;
     asignado: string;    
     situacion: string;
-    estado:string;
+    
     id_estado: number;
     
 }
@@ -38,4 +38,10 @@ export interface Zona {
 export interface Categoria {
     id_categoria: number;
     descripcion: string;
+}
+
+
+export interface OnUpdateTicketModel {
+    ticket: Ticket;
+    cambioFechaCompromiso: boolean;
 }

@@ -45,7 +45,9 @@
                     <td class="text-sm hidden lg:table-cell">{{ ticket.es_queja }}</td>
                     <td class="text-sm hidden lg:table-cell">{{ ticket.asignado}}</td>
                     <td class="hidden lg:table-cell ">
+                        
                         <p-dropdown [options]="estados" styleClass="w-full text-sm uppercase" optionLabel="descripcion"
+                        [disabled]="true"
                             optionValue="id_estado" [(ngModel)]="ticket.id_estado">
                             <ng-template let-estado pTemplate="item">
                                 <div class="flex justify-items-center  ">
@@ -82,7 +84,7 @@ position="top"
 [closeOnEscape]="false"
 [closable]="false"
 [dismissableMask]="false"
-[breakpoints]="{ '700px': '30vw', '575px': '90vw' }" 
+[breakpoints]="{'1320px':'50vw','1199px': '50vw', '700px': '30vw', '575px': '90vw' }" 
 [style]="{ width: '20vw' }" 
  >
 <app-detalle *ngIf="ticketDetalle" 
