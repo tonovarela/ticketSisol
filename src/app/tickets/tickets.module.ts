@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { TicketsRoutingModule } from './tickets-routing.module';
-import { PrimeModule } from '../lib/prime.module';
+
+import { PrimeModule } from '@lib/prime.module';
+import { SharedModule } from '@shared/shared.module';
+
+
 import { LayoutComponent } from './layout/layout.component';
 import { ListadoComponent } from './pages/listado/listado.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { MensajeComponent } from './components/mensaje/mensaje.component';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';

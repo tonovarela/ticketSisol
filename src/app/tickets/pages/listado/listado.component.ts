@@ -1,7 +1,7 @@
 
 import {  Component, inject, OnInit } from '@angular/core';
-import { Estado, OnUpdateTicketModel, Ticket } from '../../../interfaces/ticket.interface';
-import { TicketService } from '../../../services/ticket.service';
+import {  OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interface';
+import { TicketService } from '@services/ticket.service';
 
 @Component({
   selector: 'app-listado',

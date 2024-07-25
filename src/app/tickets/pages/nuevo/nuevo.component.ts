@@ -1,12 +1,14 @@
 
 import { Component, inject, OnInit } from '@angular/core';
-import { Ticket } from '../../../interfaces/ticket.interface';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { isMobile } from '../../../utils/mobileDetector';
-
-import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-import { TicketService } from '../../../services/ticket.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+
+
+import { Ticket } from '@interfaces/ticket.interface';
+import { isMobile } from '@utils/mobileDetector';
+import { TicketService } from '@services/ticket.service';
+
 
 
 @Component({
@@ -91,6 +93,7 @@ export class NuevoComponent implements OnInit {
   }
 
   importarArchivo(event: Event) {
+    event.preventDefault();
     const input = event.target as HTMLInputElement;
     if (!input.files?.length || !this.solicitudForm.enable) {
       return;

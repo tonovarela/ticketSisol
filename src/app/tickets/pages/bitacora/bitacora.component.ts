@@ -1,8 +1,9 @@
 
 import { Component, effect, EffectRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { isMobile } from '../../../utils/mobileDetector';
 import { ActivatedRoute } from '@angular/router';
-import { Mensaje, TipoMensaje } from '../../../interfaces/mensaje.interface';
+
+import { Mensaje, TipoMensaje } from '@interfaces/mensaje.interface';
+import { isMobile } from '@utils/mobileDetector';
 
 @Component({
   selector: 'app-bitacora',

@@ -1,9 +1,11 @@
 
-import {  Component, Input, OnInit } from '@angular/core';
-import { Mensaje } from '../../../interfaces/mensaje.interface';
+import {  Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrimeModule } from '../../../lib/prime.module';
-import { SharedModule } from '../../../shared/shared.module';
+
+
+import { Mensaje } from '@interfaces/mensaje.interface';
+import { PrimeModule } from '@lib/prime.module';
+import { SharedModule } from '@shared/shared.module';
 
 
 @Component({

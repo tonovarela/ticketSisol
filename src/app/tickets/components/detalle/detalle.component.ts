@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, signal, effect } from '@angular/core';
-import { PrimeModule } from '../../../lib/prime.module';
-import { Estado, OnUpdateTicketModel, Ticket } from '../../../interfaces/ticket.interface';
 import { FormsModule } from '@angular/forms';
+
+import { PrimeModule } from '@lib/prime.module';
+import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
+import { Estado, OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interface';
 
 
 @Component({

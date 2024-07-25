@@ -17,7 +17,16 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "ES2022",    
+    "baseUrl": "./",
+    "paths": {
+      "@modules/*º": ["src/app/modules/*"],
+      "@lib/*":[ "src/app/lib/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@services/*": ["src/app/services/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@utils/*": ["src/app/utils/*"],  
+    },      
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
