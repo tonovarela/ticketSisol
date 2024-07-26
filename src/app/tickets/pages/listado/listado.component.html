@@ -1,105 +1,89 @@
 <div class="max-h-fit">
     <h1 class="text-3xl text-black pb-6 hidden md:hidden lg:block">Ticket SISOL</h1>
     <div class="sm:hidden absolute bottom-20 z-50 right-0 mr-5 mb-5">
-            <button pButton  routerLink="/tickets/nuevo" icon="pi pi-plus" >   </button>
-    </div>    
-    <button (click)="login()"> Loguearse</button>
-        <p-table [value]="ticketService.Tickets()" 
-        [rows]="rows"          
-        [virtualScroll]="false"     
-        [(first)]="first" [paginator]="true" 
-        [alwaysShowPaginator]="false"
-        >
-            <ng-template pTemplate="header">
-                <tr>
-                    <th class="text-sm w-30"></th>
-                    <th class="text-sm w-30">Folio</th>
-                    
-                    <th class="text-sm hidden  lg:table-cell min-w-[100px]">Zona</th>
-                    <th class="text-sm min-w-[150px]">Solicita</th>
-                    <th class="text-sm min-w-[200px]">Titulo</th>
-                    <th class="text-sm hidden lg:table-cell  min-w-[150px]">Registro</th>                
-                    <th class="text-sm hidden lg:table-cell  w-15">Categoria</th>
-                    <th class="text-sm hidden lg:table-cell   min-w-[100px]">Es queja</th>
-                    <th class="text-sm hidden lg:table-cell   min-w-[150px]">Asignado</th>
-                    <th class="text-sm hidden  lg:table-cell w-1">Estado</th>
-                    <th class="text-sm hidden lg:table-cell   min-w-[200px]">Compromiso</th>                
-                    <th class="text-sm hidden  lg:table-cell min-w-[100px] ">Situacion</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-ticket>
-                <tr>
-                    <td class="text-sm ">
-                        <app-messages-icon routerLink="/tickets/bitacora/5" />
-                    </td>
-                    <td class="text-sm ">{{ ticket.id_ticket }} </td>              
-                    <td class="text-sm hidden  lg:table-cell">{{ ticket.zona }}</td>
-                    <td class="text-sm">{{ ticket.solicitante }}</td>
-                    <td class="text-sm ">
-                        <a (click)="verDetalle(ticket)" class="text-blue-700 text-pretty cursor-pointer">
-                            {{ ticket.titulo }}
-                        </a>
-                    </td>
-                    <td class="text-sm hidden lg:table-cell">{{ ticket.registro | date:'dd-MM-YYYY'}}</td>                
-                    <td class="text-sm hidden lg:table-cell">{{ ticket.categoria }}</td>
-                    <td class="text-sm hidden lg:table-cell ">
-                        
-                            @if(ticket.es_queja){
-                                <app-bad-face [class]="'w-5 h-5' "></app-bad-face>
-                            }@else{
-                                <app-smile-face [class]="'w-5 h-5'"></app-smile-face>
-                            }
+        <button pButton routerLink="/tickets/nuevo" icon="pi pi-plus"> </button>
+    </div>
+    <p-table [value]="ticketService.Tickets()" [rows]="rows" [virtualScroll]="false" [(first)]="first"
+        [paginator]="true" [alwaysShowPaginator]="false">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="text-sm w-30"></th>
+                <th class="text-sm w-30">Folio</th>
 
-                                            
+                <th class="text-sm hidden  lg:table-cell min-w-[100px]">Zona</th>
+                <th class="text-sm min-w-[150px]">Solicita</th>
+                <th class="text-sm min-w-[200px]">Titulo</th>
+                <th class="text-sm hidden lg:table-cell  min-w-[150px]">Registro</th>
+                <th class="text-sm hidden lg:table-cell  w-15">Categoria</th>
+                <th class="text-sm hidden lg:table-cell   min-w-[100px]">Es queja</th>
+                <th class="text-sm hidden lg:table-cell   min-w-[150px]">Asignado</th>
+                <th class="text-sm hidden  lg:table-cell w-1">Estado</th>
+                <th class="text-sm hidden lg:table-cell   min-w-[200px]">Compromiso</th>
+                <th class="text-sm hidden  lg:table-cell min-w-[100px] ">Situacion</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ticket>
+            <tr>
+                <td class="text-sm ">
+                    <app-messages-icon routerLink="/tickets/bitacora/5" />
+                </td>
+                <td class="text-sm ">{{ ticket.id_ticket }} </td>
+                <td class="text-sm hidden  lg:table-cell">{{ ticket.zona }}</td>
+                <td class="text-sm">{{ ticket.solicitante }}</td>
+                <td class="text-sm ">
+                    <a (click)="verDetalle(ticket)" class="text-blue-700 text-pretty cursor-pointer">
+                        {{ ticket.titulo }}
+                    </a>
+                </td>
+                <td class="text-sm hidden lg:table-cell">{{ ticket.registro | date:'dd-MM-YYYY'}}</td>
+                <td class="text-sm hidden lg:table-cell">{{ ticket.categoria }}</td>
+                <td class="text-sm hidden lg:table-cell ">
 
-                    </td>
-                    <td class="text-sm hidden lg:table-cell">{{ ticket.asignado}}</td>
-                    <td class="hidden lg:table-cell ">
-                        
-                        <p-dropdown [options]="estados" styleClass="w-full text-sm uppercase" optionLabel="descripcion"
-                        [disabled]="true"
-                            optionValue="id_estado" [(ngModel)]="ticket.id_estado">
-                            <ng-template let-estado pTemplate="item">
-                                <div class="flex justify-items-center  ">
-                                    <div class="text-sm ">{{ estado.descripcion}}</div>
-                                </div>
-                            </ng-template>
-                        </p-dropdown>                    
-                    </td>
-                    <td class="text-sm hidden lg:table-cell">{{ ticket.fecha_respuesta | date:'d-MM-YYYY'}}</td>
-                    <td class="text-sm  hidden  lg:table-cell ">
-                        <span
-                            class="inline-flex items-center rounded-md bg-emerald-100 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{ticket.situacion}}</span>
-                    </td>
-            </ng-template>
-        </p-table>
-        <div class="sm:hidden">
-            <div class="flex justify-evenly ">
-                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()"
-                    styleClass="p-button-text"></p-button>            
-                    <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()"
-                    styleClass="p-button-text"></p-button>            
-            </div>        
+                    @if(ticket.es_queja){
+                    <app-bad-face [class]="'w-5 h-5' "></app-bad-face>
+                    }@else{
+                    <app-smile-face [class]="'w-5 h-5'"></app-smile-face>
+                    }
+
+
+
+                </td>
+                <td class="text-sm hidden lg:table-cell">{{ ticket.asignado}}</td>
+                <td class="hidden lg:table-cell ">
+
+                    <p-dropdown [options]="estados" styleClass="w-full text-sm uppercase" optionLabel="descripcion"
+                        [disabled]="true" optionValue="id_estado" [(ngModel)]="ticket.id_estado">
+                        <ng-template let-estado pTemplate="item">
+                            <div class="flex justify-items-center  ">
+                                <div class="text-sm ">{{ estado.descripcion}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </td>
+                <td class="text-sm hidden lg:table-cell">{{ ticket.fecha_respuesta | date:'d-MM-YYYY'}}</td>
+                <td class="text-sm  hidden  lg:table-cell ">
+                    <span
+                        class="inline-flex items-center rounded-md bg-emerald-100 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">{{ticket.situacion}}</span>
+                </td>
+        </ng-template>
+    </p-table>
+    <div class="sm:hidden">
+        <div class="flex justify-evenly ">
+            <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()"
+                styleClass="p-button-text"></p-button>
+            <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()"
+                styleClass="p-button-text"></p-button>
         </div>
+    </div>
 
-    
-        
-    
+
+
+
 </div>
 
-<p-dialog  [visible]="ticketDetalle !=undefined"
-[modal]="true" 
-[draggable]="false"
-position="top" 
-[closeOnEscape]="false"
-[closable]="false"
-[dismissableMask]="false"
-[breakpoints]="{'1320px':'60vw','1199px': '60vw', '700px': '40vw', '575px': '90vw' }" 
-[style]="{ width: '20vw' }" 
- >
-<app-detalle *ngIf="ticketDetalle" 
-            [catalogoEstados]="estados" 
-            [ticket]="ticketDetalle" 
-            (onClose)="cerrarDetalle()" 
-            (onUpdate)="actualizarTicket($event)"></app-detalle>
+<p-dialog [visible]="ticketDetalle !=undefined" [modal]="true" [draggable]="false" position="top"
+    [closeOnEscape]="false" [closable]="false" [dismissableMask]="false"
+    [breakpoints]="{'1320px':'60vw','1199px': '60vw', '700px': '60vw', '575px': '90vw' }" [style]="{ width: '20vw' }">
+    <app-detalle *ngIf="ticketDetalle" [catalogoEstados]="estados" [ticket]="ticketDetalle" (onClose)="cerrarDetalle()"
+        (onUpdate)="actualizarTicket($event)"></app-detalle>
 </p-dialog>

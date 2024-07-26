@@ -25,7 +25,7 @@ export class ListadoComponent implements OnInit {
   ticketService = inject(TicketService);
 
   estados = this.ticketService.estados;  
-  async login(){
+  async loginWithGoogleAutentication(){
     try {
       const user= await this.firebaseService.iniciarLogin();      
       if(user ){        

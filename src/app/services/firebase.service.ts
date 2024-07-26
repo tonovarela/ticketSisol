@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
 
-import { getAuth, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { getAuth, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import { environment } from 'src/environments/environment.development';
 
 
 
@@ -11,14 +12,7 @@ import { GoogleAuthProvider } from "firebase/auth";
 })
 export class FireService {
 
-   firebaseConfig = {
-    apiKey: "AIzaSyAgRllSioGe9dTubfYl3HJQHdb3qkit-ao",
-    authDomain: "login-aae3a.firebaseapp.com",
-    projectId: "login-aae3a",
-    storageBucket: "login-aae3a.appspot.com",
-    messagingSenderId: "1060595366469",
-    appId: "1:1060595366469:web:ecb85034079df598c4c12c"
-  };
+   firebaseConfig = environment.googleEnvironment;
    app = initializeApp(this.firebaseConfig);
 
 
