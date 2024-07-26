@@ -1,7 +1,10 @@
 
 import {  Component, inject, OnInit } from '@angular/core';
 import {  OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interface';
+import { FireService } from '@services/firebase.service';
 import { TicketService } from '@services/ticket.service';
+import { UsuarioService } from '@services/usuario.service';
+
 
 @Component({
   selector: 'app-listado',
@@ -9,9 +12,12 @@ import { TicketService } from '@services/ticket.service';
   styleUrl: './listado.component.css',  
 })
 export class ListadoComponent implements OnInit {  
+  firebaseService= inject(FireService);
+  usuarioService = inject(UsuarioService)
   ngOnInit(): void {    
     
   } 
+
   
   first = 0;
   rows = 10;    
@@ -19,6 +25,18 @@ export class ListadoComponent implements OnInit {
   ticketService = inject(TicketService);
 
   estados = this.ticketService.estados;  
+  async login(){
+    try {
+      const user= await this.firebaseService.iniciarLogin();      
+      if(user ){        
+        this.usuarioService.usuario = user;
+        console.log(this.usuarioService.usuario);
+      }
+    }catch(e){
+      console.error(e);
+    }
+    
+  }
 
   next() {
     this.first = this.first + this.rows;

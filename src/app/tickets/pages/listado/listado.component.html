@@ -3,7 +3,7 @@
     <div class="sm:hidden absolute bottom-20 z-50 right-0 mr-5 mb-5">
             <button pButton  routerLink="/tickets/nuevo" icon="pi pi-plus" >   </button>
     </div>    
-    
+    <button (click)="login()"> Loguearse</button>
         <p-table [value]="ticketService.Tickets()" 
         [rows]="rows"          
         [virtualScroll]="false"     
