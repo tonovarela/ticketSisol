@@ -1,56 +1,67 @@
-<main  class="w-full h-screen flex flex-col items-center justify-center px-4 bg-slate-300">
-    <div class="max-w-sm w-full text-gray-600 space-y-5 bg-white rounded-md px-10 py-16 ">
-      <div class="text-center pb-8">
-        <img src="https://servicios.litoprocess.com/litoapps/img/Lito_2022-65.png" width="150" class="mx-auto" />
-        <div class="mt-5">
-          <h3 class="text-gray-800 text-2xl font-bold sm:text-3xl">
-            Ingreso SISOL
-          </h3>
+<main  class="w-full h-screen flex flex-col items-center justify-center px-4 bg-[#f7f6f3]">    
+    <div class="max-w-md w-full text-gray-600 space-y-5 bg-white rounded-lg  border  ">      
+      <div class="bg-slate-700 h-auto py-4  rounded-t-lg">
+        <img src="https://www.litoprocess.com/img/logo_lito_65.png"  class="mx-auto h-10" />
+      </div>        
+      <div class="px-10 pb-16 ">
+        <div class="text-center pb-8  ">        
+          <div class="mt-5">
+            <h3 class="text-gray-800 text-2xl font-bold sm:text-3xl">
+              Ingreso SISOL
+            </h3>
+          </div>
         </div>
-      </div>
-      <form onSubmit="event.preventDefault()" class="space-y-5">
-        <div>
-          <label class="font-medium">Usuario </label>
-          <input
-            type="text"
-            name="usuario"
-            [(ngModel)]="loginForm.usuario"
-            required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          />
-        </div>
-        <div>
-          <label class="font-medium"> Password </label>
-          <input
-            type="password"
-            name="password"
-            [(ngModel)]="loginForm.password"
-            required
-            class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-          />
+        <form onSubmit="event.preventDefault()" class="space-y-5">
+          <div>
+            <label class="font-medium">Usuario </label>
+            <input
+              type="text"
+              name="usuario"
+              [(ngModel)]="loginForm.usuario"
+              required
+              class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            />
+          </div>
+          <div>
+            <label class="font-medium"> Password </label>
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="loginForm.password"
+              required
+              class="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+            />
+          </div>
+          
+          <button
+          (click)="login()"
+            class="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+          >
+            Ingresar
+          </button>
+          
+        </form>
+        <hr class="border-1 border-slate-400  my-2 mt-5">
+        <div class=" mx-auto w-full font-bold text-lg  mb-3">          
+          Accede con          
         </div>
         
+        
+        
         <button
-        (click)="login()"
-          class="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
+        (click)="loginWithGoogleAutentication()"
+          class="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
         >
-          Ingresar
-        </button>
-      </form>
-      <div class="mx-auto w-full text-center font-thin">o</div>
-      
-      <button
-      (click)="loginWithGoogleAutentication()"
-        class="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
-      >
-        <!-- SVG for Google Sign In -->
-        <img
-          src="https://raw.githubusercontent.com/sidiDev/remote-assets/7cd06bf1d8859c578c2efbfda2c68bd6bedc66d8/google-icon.svg"
-          alt="Google"
-          class="w-5 h-5"
-        />
-        <!-- Comment: Google Icon SVG here -->
-        Ingresar con una cuenta de  Google
-      </button> 
+          <!-- SVG for Google Sign In -->
+          <img
+            src="https://raw.githubusercontent.com/sidiDev/remote-assets/7cd06bf1d8859c578c2efbfda2c68bd6bedc66d8/google-icon.svg"
+            alt="Google"
+            class="w-5 h-5"
+          />
+          <!-- Comment: Google Icon SVG here -->
+          Ingresar con una cuenta de  Google
+        </button> 
+      </div>
+     
     </div>
   </main>

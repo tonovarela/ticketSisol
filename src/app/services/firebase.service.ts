@@ -24,7 +24,7 @@ export class FireService {
      try {
       const {user}=await signInWithPopup(auth, provider)
       const {displayName, email, photoURL} = user;    
-      return {displayName, email, photoURL};
+      return {displayName, email, photoURL,username:email?.split("@")[0]};
       
      }catch(e){
        console.error(e);

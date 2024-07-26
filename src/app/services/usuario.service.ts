@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class UsuarioService {
 
 
-  public usuario: { displayName?: string | null; email?: string | null; photoURL: string | null; } = { displayName: null, email: null, photoURL: null };  
+  public usuario: { displayName?: string | null; email?: string | null; photoURL: string | null;username?:string  } = { displayName: null, email: null, photoURL: null,username:undefined };  
   constructor() { }
 }

@@ -19,6 +19,7 @@ export class LoginComponent {
    login(){
     this.usuarioService.usuario.displayName="Litoapps User";
     this.usuarioService.usuario.email="user@litoprocess.com";
+    this.usuarioService.usuario.username="mestelles";
     this.usuarioService.usuario.photoURL="https://github.com/shadcn.png";
     this.router.navigate(['/tickets']);
     
