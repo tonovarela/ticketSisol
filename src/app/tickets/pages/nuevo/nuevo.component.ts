@@ -51,7 +51,8 @@ export class NuevoComponent implements OnInit {
 
   }
 
-  async registrarSolicitud() {
+  async registrarSolicitud(event: Event) {
+    event.preventDefault();
     this.solicitudForm.markAllAsTouched();
     if (this.solicitudForm.invalid) {      
       return;

@@ -18,6 +18,8 @@ import { CameraComponent } from '../icons/camera/camera.component';
 import { AttachmentComponent } from '../icons/attachment/attachment.component';
 import { MessagesComponent } from '../icons/messages/messages.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
+import { SmileFaceComponent } from '../icons/smile-face/smile-face.component';
+import { BadFaceComponent } from '../icons/bad-face/bad-face.component';
 
 
 
@@ -35,6 +37,8 @@ import { DetalleComponent } from './components/detalle/detalle.component';
     MensajeComponent,    
     DetalleComponent,    
     CameraComponent,
+    SmileFaceComponent,
+    BadFaceComponent,
     MessagesComponent,
     AttachmentComponent,
     FormsModule,

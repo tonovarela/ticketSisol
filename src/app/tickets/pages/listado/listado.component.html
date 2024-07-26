@@ -42,7 +42,17 @@
                     </td>
                     <td class="text-sm hidden lg:table-cell">{{ ticket.registro | date:'dd-MM-YYYY'}}</td>                
                     <td class="text-sm hidden lg:table-cell">{{ ticket.categoria }}</td>
-                    <td class="text-sm hidden lg:table-cell">{{ ticket.es_queja }}</td>
+                    <td class="text-sm hidden lg:table-cell ">
+                        
+                            @if(ticket.es_queja){
+                                <app-bad-face [class]="'w-5 h-5' "></app-bad-face>
+                            }@else{
+                                <app-smile-face [class]="'w-5 h-5'"></app-smile-face>
+                            }
+
+                                            
+
+                    </td>
                     <td class="text-sm hidden lg:table-cell">{{ ticket.asignado}}</td>
                     <td class="hidden lg:table-cell ">
                         
@@ -84,7 +94,7 @@ position="top"
 [closeOnEscape]="false"
 [closable]="false"
 [dismissableMask]="false"
-[breakpoints]="{'1320px':'50vw','1199px': '50vw', '700px': '30vw', '575px': '90vw' }" 
+[breakpoints]="{'1320px':'60vw','1199px': '60vw', '700px': '40vw', '575px': '90vw' }" 
 [style]="{ width: '20vw' }" 
  >
 <app-detalle *ngIf="ticketDetalle" 

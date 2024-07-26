@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { PrimeModule } from '@lib/prime.module';
 import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
 import { Estado, OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interface';
+import { isMobile } from '../../../utils/mobileDetector';
+import { CALENDAR_LANG_ES } from 'src/app/conf/locale';
 
 
 @Component({
@@ -15,12 +17,15 @@ import { Estado, OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interfac
 
 })
 export class DetalleComponent implements OnInit {
-  today=new Date().toISOString().split('T')[0];
+  localeCalendar= CALENDAR_LANG_ES;
+  esFechaRequerida = false;
+  today=new Date();
   ticket!:Ticket;
   estados= signal<Estado[]>([]);
+  isMobile = isMobile();
   cambioFechaCompromiso = false;
   ngOnInit(): void {    
-    this.ticket = {...this.ticketParam};    
+    this.ticket = {...this.ticketParam};        
     this.setEstados(this.ticket.fecha_respuesta!=undefined);    
   }
   @Input('catalogoEstados') catalogoEstados: Estado[] = [];
@@ -28,12 +33,13 @@ export class DetalleComponent implements OnInit {
   @Output('onClose') onClose = new EventEmitter<void>();
   @Output('onUpdate') onUpdate = new EventEmitter<OnUpdateTicketModel>();
 
-  onDateChange(event:string) {    
-    let cambioFechaCompromiso = this.ticket.fecha_respuesta!=undefined && event.length>0;
+  onDateChange(event:any) {            
+    let cambioFechaCompromiso = this.ticket.fecha_respuesta!=undefined && event!=undefined;
     this.cambioFechaCompromiso = cambioFechaCompromiso;    
-    this.setEstados(event.length>0);    
+    this.ticket.fecha_respuesta = event;  
+    this.setEstados(true);    
   }
-
+  
   private setEstados(tieneFecha:boolean=false){
       if (!tieneFecha && this.ticket.id_estado!=3){      
         this.ticket.id_estado=1;
@@ -47,6 +53,11 @@ export class DetalleComponent implements OnInit {
     this.ticket!.fecha_respuesta = undefined;    
   }
   actualizar() {    
+    this.esFechaRequerida=false;
+        if(this.ticket.id_estado!=3 && this.ticket.fecha_respuesta==undefined){
+            this.esFechaRequerida=true
+          return;            
+        }
     this.onUpdate.emit({ticket:this.ticket,cambioFechaCompromiso:this.cambioFechaCompromiso});
   }
   

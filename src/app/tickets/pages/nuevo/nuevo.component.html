@@ -1,5 +1,5 @@
 <div class="max-w-2xl mx-auto  rounded-lg  shadow-lg border">
-    <form [formGroup]="solicitudForm" (ngSubmit)="registrarSolicitud()">
+    <form [formGroup]="solicitudForm" (ngSubmit)="registrarSolicitud($event)">
         <h1 class="text-3xl text-black p-5"> Nueva Solicitud</h1>
         <div class="editor mx-auto w-full flex flex-col text-gray-800 border border-gray-300 p-4 ">
             <p-dropdown [options]="categorias" formControlName="id_categoria" placeholder="Seleccione una categoría"
@@ -63,16 +63,16 @@
             <div
                 class="icons   border-dashed border-gray-300 border-2  flex justify-center bg-gray-200/50 p-5 text-gray-500 m-2 gap-x-3">
                 <label id="select-image">
-                    @if(isMobile){
+                    <!-- @if(isMobile){
                     <app-camera-icon></app-camera-icon>
                     <input hidden [disabled]="!this.solicitudForm.enabled" name="archivo"
                         (change)="importarArchivo($event)" capture="environment" accept="image/*" type="file">
-                    }@else{
+                    }@else{ -->
                     <app-attachment-icon
                         [class]="'mr-2 cursor-pointer hover:text-gray-700 border rounded-full  p-1 h-[50px]'" />
                     <input hidden name="archivo" [disabled]="!this.solicitudForm.enabled"
                         (change)="importarArchivo($event)" type="file">
-                    }
+                    <!-- } -->
                 </label>
 
             </div>
