@@ -25,18 +25,21 @@ export class ListadoComponent implements OnInit {
   ticketService = inject(TicketService);
 
   estados = this.ticketService.estados;  
-  async loginWithGoogleAutentication(){
-    try {
-      const user= await this.firebaseService.iniciarLogin();      
-      if(user ){        
-        this.usuarioService.usuario = user;
-        console.log(this.usuarioService.usuario);
-      }
-    }catch(e){
-      console.error(e);
-    }
+//   async loginWithGoogleAutentication(){
+//     try {
+//       const tokenAutentication= await this.firebaseService.iniciarLogin();      
+//       if(tokenAutentication ==null ){        
+//         return;
+//       }
+
+//       //this.usuarioService.usuario = user;
+// //      console.log(this.usuarioService.usuario);
+
+//     }catch(e){
+//       console.error(e);
+//     }
     
-  }
+//   }
 
   next() {
     this.first = this.first + this.rows;

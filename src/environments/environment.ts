@@ -1,4 +1,5 @@
 export const environment = {
-    googleApiKey: 'MiAPIKEY',
+    googleEnvironment: 'MiAPIKEY',
+    urlAuthService:"/lito/api",
     production: true,
 };

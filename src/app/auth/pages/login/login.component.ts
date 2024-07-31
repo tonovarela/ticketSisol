@@ -1,6 +1,6 @@
 
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { TypeAuth } from '@interfaces/usuario.interface';
 import { FireService } from '@services/firebase.service';
 import { UsuarioService } from '@services/usuario.service';
 
@@ -9,33 +9,28 @@ import { UsuarioService } from '@services/usuario.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
-
-  loginForm =  {usuario:'mestelles',password:'123456'};
+export class LoginComponent implements OnInit {
+ ngOnInit() {
+   
+  }
+   loginForm =  {usuario:'',password:''};
    usuarioService =inject(UsuarioService);
    firebaseService = inject(FireService)
-   router = inject(Router);
+   
 
-   login(){
-    this.usuarioService.usuario.displayName="Litoapps User";
-    this.usuarioService.usuario.email="user@litoprocess.com";
-    this.usuarioService.usuario.username="mestelles";
-    this.usuarioService.usuario.photoURL="https://github.com/shadcn.png";
-    this.router.navigate(['/tickets']);
-    
+  async login(){      
+    await this.usuarioService.login(this.loginForm.usuario,this.loginForm.password);    
+        
    }
 
-   async loginWithGoogleAutentication(){
-    try {
-      const user= await this.firebaseService.iniciarLogin();      
-      if(user ){        
-        this.usuarioService.usuario = user;
-        this.router.navigate(['/tickets']);        
+   async loginWitFireBaseAutentication(typeAuth:TypeAuth){        
+    const tokenAutentication=  await this.firebaseService.iniciarLogin(typeAuth);
+        
+      if (tokenAutentication == null) {
+        return;
       }
-    }catch(e){
-      console.error(e);
-    }
-    
+    await this.usuarioService.checkToken(tokenAutentication);                
+      
   }
 
 

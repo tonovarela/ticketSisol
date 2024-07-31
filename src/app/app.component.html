@@ -1,4 +1,11 @@
 
+@if(isLoadingUser()){
+    <div class="flex items-center justify-center h-screen bg-gray-200 ">
+        <div class="border-t-transparent border-solid animate-spin  rounded-full border-blue-500 border-2 h-64 w-64"></div>
+    </div>
+}@else{
+    <router-outlet></router-outlet>
+}
+<p-toast />
 
-<router-outlet></router-outlet>
 

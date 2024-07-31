@@ -1,17 +1,18 @@
 <main  class="w-full h-screen flex flex-col items-center justify-center px-4 bg-[#f7f6f3]">    
-    <div class="max-w-md w-full text-gray-600 space-y-5 bg-white rounded-lg  border  ">      
-      <div class="bg-slate-700 h-auto py-4  rounded-t-lg">
-        <img src="https://www.litoprocess.com/img/logo_lito_65.png"  class="mx-auto h-10" />
+    <div class="max-w-md w-full text-gray-600 space-y-5 bg-white rounded-lg pb-10  border  shadow-xl ">      
+      <div class="bg-white border border-slate-200 shadow-sm h-auto py-2  rounded-t-lg">
+        <img src="https://servicios.litoprocess.com/colaboradores/assets/_images/logoLogin.svg"  class="mx-auto h-14 " />
       </div>        
-      <div class="px-10 pb-16 ">
-        <div class="text-center pb-8  ">        
-          <div class="mt-5">
+      <div class="px-10 ">
+        <div class="text-center pb-2">        
+          <div>
             <h3 class="text-gray-800 text-2xl font-bold sm:text-3xl">
-              Ingreso SISOL
-            </h3>
-          </div>
+               SISOL
+            </h3>            
+        </div>          
         </div>
-        <form onSubmit="event.preventDefault()" class="space-y-5">
+        <h2 class="font-bold my-2">Accede a tu cuenta</h2>
+        <form onSubmit="event.preventDefault()" class="space-y-5 ">
           <div>
             <label class="font-medium">Usuario </label>
             <input
@@ -35,8 +36,10 @@
           
           <button
           (click)="login()"
+          
             class="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
           >
+          
             Ingresar
           </button>
           
@@ -49,17 +52,30 @@
         
         
         <button
-        (click)="loginWithGoogleAutentication()"
+        (click)="loginWitFireBaseAutentication('GOOGLE')"        
           class="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100"
         >
           <!-- SVG for Google Sign In -->
           <img
-            src="https://raw.githubusercontent.com/sidiDev/remote-assets/7cd06bf1d8859c578c2efbfda2c68bd6bedc66d8/google-icon.svg"
+            src="/assets/img/google-icon.svg"
             alt="Google"
             class="w-5 h-5"
           />
           <!-- Comment: Google Icon SVG here -->
-          Ingresar con una cuenta de  Google
+          Tu cuenta de  Google
+        </button> 
+        <button
+        (click)="loginWitFireBaseAutentication( 'MICROSOFT')"        
+          class="w-full flex items-center justify-center gap-x-3 py-2.5 border rounded-lg text-sm font-medium hover:bg-gray-50 duration-150 active:bg-gray-100 mt-5"
+        >
+          <!-- SVG for Microsoft Sign In -->
+          <img
+              src="/assets/img/microsoft.svg"
+            alt="Microsoft"
+            class="w-5 h-5"
+            
+          />          
+          Tu cuenta de  Microsoft
         </button> 
       </div>
      
