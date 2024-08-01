@@ -27,10 +27,11 @@ export class UsuarioService {
     try {
       const { usuario, token: newToken } = await firstValueFrom(
         this.http.get<ResponseCheckToken>(`${this.URL_AUTH_SERVICE}/auth/checkToken`,
-          { headers: { 'Authorization': `Bearer ${token}` } }).pipe(delay(2000))
+          { headers: { 'Authorization': `Bearer ${token}` } })
       );
+      this.stateAuth.set({ statusLogin: StatusLogin.LOGGED, usuario });      
       localStorage.setItem(this.labelToken, newToken);
-      this.stateAuth.set({ statusLogin: StatusLogin.LOGGED, usuario });
+      
     } catch (exception: any) {     
       this.stateAuth.set({ statusLogin: StatusLogin.ERROR, usuario: null, mensaje: exception.error['error'] });
     }
