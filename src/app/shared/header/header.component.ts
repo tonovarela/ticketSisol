@@ -16,6 +16,10 @@ export class HeaderComponent {
   usuario = computed(()=>{            
     return this.usuarioService.StateAuth().usuario  || {name:'',photoURL:'',id:'',username:'',email:''};
   });
+
+  cerrarSesion(){ 
+    this.usuarioService.closeSession();
+  }
   
 
  }

@@ -17,7 +17,7 @@ export class FireService {
   
 
   async iniciarLogin(tipoAuth:TypeAuth): Promise<string | null> {    
-    let provider =undefined;
+    let provider =undefined;    
     if (tipoAuth === 'GOOGLE') {
       provider = new GoogleAuthProvider();
     }
@@ -28,8 +28,8 @@ export class FireService {
       return null;
     }
     try {
-      const response = await signInWithPopup(this.auth, provider)      
-      return response.user.getIdToken();      
+      const response = await signInWithPopup(this.auth, provider)            
+      return await  response.user.getIdToken();      
     }
     catch (e) {
       return null

@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioService } from '@services/usuario.service';
 import { MessageService } from 'primeng/api';
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
           this.router.navigate(['/auth/login']);
           break;
         case 'ERROR':
-          const { mensaje } = this.usuarioService.StateAuth();          
+          const { mensaje } = this.usuarioService.StateAuth();                    
           this.messageService.add({ severity: 'error', summary: 'Login', detail: mensaje });
           this.usuarioService.clearStorage();
           this.router.navigate(['/auth/login']);

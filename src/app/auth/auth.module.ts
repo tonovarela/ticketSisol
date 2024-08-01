@@ -5,7 +5,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import {  RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     RouterModule,
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,    
     AuthRoutingModule
   ]
 })

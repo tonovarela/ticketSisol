@@ -31,8 +31,7 @@ export class UsuarioService {
       );
       localStorage.setItem(this.labelToken, newToken);
       this.stateAuth.set({ statusLogin: StatusLogin.LOGGED, usuario });
-    } catch (exception: any) {
-
+    } catch (exception: any) {     
       this.stateAuth.set({ statusLogin: StatusLogin.ERROR, usuario: null, mensaje: exception.error['error'] });
     }
   }
@@ -41,8 +40,7 @@ export class UsuarioService {
     try {
       const resp = await firstValueFrom(this.http.post<{ token: string }>(`${this.URL_AUTH_SERVICE}/auth/login`, { login, password }));
       await this.checkToken(resp.token);
-    } catch (exception: any) {
-
+    } catch (exception: any) {     
       this.stateAuth.set({ statusLogin: StatusLogin.ERROR, usuario: null, mensaje: exception.error['error'] });
 
     }
