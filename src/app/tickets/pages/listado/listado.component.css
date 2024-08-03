@@ -21,9 +21,8 @@
 
 }
 
-::ng-deep .p-datatable-wrapper {
-
-  height: calc(80vh) !important;
+::ng-deep .p-datatable-wrapper {  
+  height: calc(70vh) !important;
 }
 
 

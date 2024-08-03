@@ -3,14 +3,14 @@ export interface Ticket {
     zona:string;
     solicitante: string;
     titulo:string;
-    registro: Date;
+    fecha_registro: Date;
     dias_respuesta: number;
     fecha_respuesta?: Date;
+    descripcion: string;    
     categoria: string;
     es_queja: boolean;
     asignado: string;    
-    situacion: string;
-    
+    situacion: string;    
     id_estado: number;
     
 }
@@ -44,4 +44,15 @@ export interface Categoria {
 export interface OnUpdateTicketModel {
     ticket: Ticket;
     cambioFechaCompromiso: boolean;
+}
+
+
+export  interface ResponseListadoTickets{
+    tickets:Ticket[];
+}
+
+export interface ResponseCatalogo {
+    estados: Estado[];
+    categorias: Categoria[];
+    zonas: Zona[];
 }

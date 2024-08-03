@@ -18,11 +18,13 @@
     </div>    
     <div class="flex  flex-col sm:flex-row  ">
         <label for="compromiso" class="label-ticket ">Compromiso</label>    
+        
         <span class="w-full">
-            <p-calendar  [minDate]="today"
+            <p-calendar  
+            [minDate]="ticket.fecha_respuesta || today"
             [appendTo]="'body'"                  
             [class]="esFechaRequerida?'ng-invalid ng-dirty':''"      
-            [disabled]="ticket.fecha_respuesta!=undefined"
+            [disabled]="ticket.fecha_respuesta!=null"
             [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" 
             [ngModel]="ticket.fecha_respuesta"
             inputStyleClass="text-sm  h-full p-2 "                         
@@ -57,8 +59,21 @@
     </div>
     <div class="flex   flex-col sm:flex-row ">
         <label for="titulo" class="label-ticket ">Título</label>
-        <input pInputText id="titulo" class="w-full input-disabled " [value]="ticket.titulo" disabled
-            autocomplete="off" />
+        <textarea  pInputTextarea 
+        rows="2"
+        
+        [autoResize]="false"
+         id="titulo" class="w-full input-disabled " [value]="ticket.titulo" disabled
+            autocomplete="off" ></textarea>
+    </div>
+    <div class="flex   flex-col sm:flex-row ">
+        <label for="descripcion" class="label-ticket ">Descripción</label>
+        <textarea  pInputTextarea 
+        rows="3"
+        
+        [autoResize]="false"
+         id="titulo" class="w-full input-disabled " [value]="ticket.descripcion" disabled
+            autocomplete="off" ></textarea>
     </div>
     <div class="flex   flex-col sm:flex-row mb-3">
         <label for="categoria" class="label-ticket ">Categoria</label>

@@ -25,8 +25,12 @@ export class DetalleComponent implements OnInit {
   isMobile = isMobile();
   cambioFechaCompromiso = false;
   ngOnInit(): void {    
-    this.ticket = {...this.ticketParam};        
-    this.setEstados(this.ticket.fecha_respuesta!=undefined);    
+    this.ticket = {...this.ticketParam};           
+    if (this.ticket.fecha_respuesta!=null) {
+      const [year, month, day] = this.ticket.fecha_respuesta.toString().split('-').map(Number);  
+      this.ticket.fecha_respuesta = new Date(year, month - 1, day);          
+    }        
+    this.setEstados(this.ticket.fecha_respuesta!=null);    
   }
   @Input('catalogoEstados') catalogoEstados: Estado[] = [];
   @Input('ticket') ticketParam!: Ticket;
@@ -41,12 +45,14 @@ export class DetalleComponent implements OnInit {
   }
   
   private setEstados(tieneFecha:boolean=false){
-      if (!tieneFecha && this.ticket.id_estado!=3){      
-        this.ticket.id_estado=1;
-        this.estados.set(this.catalogoEstados.filter(e=>e.id_estado==3 || e.id_estado==1));
-      }else{
-        this.estados.set(this.catalogoEstados);
-      }                
+    // console.log(tieneFecha);
+    // console.log(this.ticket.id_estado);
+    //    if (!tieneFecha && this.ticket.id_estado!=11){      
+    //      this.ticket.id_estado=1;
+    //      this.estados.set(this.catalogoEstados.filter(e=>e.id_estado==11 || e.id_estado==2));
+    //    }else{
+         this.estados.set(this.catalogoEstados);
+       //}                
   }
   
   onKey(key:Event){

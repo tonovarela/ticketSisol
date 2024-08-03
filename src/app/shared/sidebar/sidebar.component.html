@@ -44,10 +44,19 @@
         </button>
          -->
     </nav>
-    <a (click)="cerrarSesion()" class="absolute w-full bg-black/35   cursor-pointer bottom-0  text-white flex items-center justify-center py-4">
-        <i class="pi pi-sign-out mr-3"></i>
-        
-    </a>
+    <div (click)="cerrarSesion()" class="absolute  w-full   bottom-0 cursor-pointer ">        
+        <a  class=" bg-black/35  h-12    text-white flex items-center justify-around">
+            <label class="text-sm">{{username()}}</label>
+            <i class="pi pi-sign-out mr-3"></i>
+            
+        </a>
+        <!-- <a  class=" bg-black/35  h-12    text-white flex items-center justify-around">
+            <label class="text-sm">{{username()}}</label>
+            <i class="pi pi-sign-out mr-3"></i>
+            
+        </a> -->
+    </div>
+    
     
     
 </aside>

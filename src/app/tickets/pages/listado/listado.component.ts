@@ -14,32 +14,19 @@ import { UsuarioService } from '@services/usuario.service';
 export class ListadoComponent implements OnInit {  
   firebaseService= inject(FireService);
   usuarioService = inject(UsuarioService)
-  ngOnInit(): void {    
-    
-  } 
-
-  
   first = 0;
-  rows = 10;    
+  rows = 50;    
   ticketDetalle:Ticket| undefined;
   ticketService = inject(TicketService);
-
   estados = this.ticketService.estados;  
-//   async loginWithGoogleAutentication(){
-//     try {
-//       const tokenAutentication= await this.firebaseService.iniciarLogin();      
-//       if(tokenAutentication ==null ){        
-//         return;
-//       }
 
-//       //this.usuarioService.usuario = user;
-// //      console.log(this.usuarioService.usuario);
 
-//     }catch(e){
-//       console.error(e);
-//     }
+  ngOnInit(): void {    
+    this.ticketService.cargarTickets();
+    //this.ticketService.cargarCatalogos();
     
-//   }
+  } 
+  
 
   next() {
     this.first = this.first + this.rows;
@@ -60,7 +47,7 @@ export class ListadoComponent implements OnInit {
 
 
   verDetalle(ticket:Ticket){
-    //this.verDetalleTicket = true;    
+    
     this.ticketDetalle=ticket
   }
 

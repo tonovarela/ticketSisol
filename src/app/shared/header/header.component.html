@@ -9,7 +9,8 @@
         </button> -->
         <button *ngIf="uiService.IsOpenMenu()" (click)="uiService.setMenuStatus(false)"
             class="h-full w-full fixed inset-0 cursor-default"></button>
-        <div *ngIf="uiService.IsOpenMenu()" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-12">
+            
+        <div *ngIf="uiService.IsOpenMenu()" class="absolute w-32 z-50 bg-white rounded-lg shadow-lg py-2 mt-12">
             <a  class="block px-4  account-link py-1 hover:text-white">{{usuario().username}}</a>
             <a (click)="usuarioService.closeSession()" class="block px-4 account-link py-1 cursor-pointer hover:text-white">Salir</a>
         </div>
@@ -21,19 +22,30 @@
 <!-- Mobile Header & Nav -->
 <header class="w-full bg-gradient-to-r from-indigo-900 to-sky-500 py-5 px-6 sm:hidden">
     <div class="flex items-center justify-between">
-        <div class="flex">            
+        
             <a  class="text-white text-3xl  capitalize hover:text-gray-300">                
                  Tickets | SISOL</a>
-            </div>
         
-        <button (click)="uiService.toggleMenu()" class="text-white text-3xl focus:outline-none">        
-            @if (uiService.IsOpenMenu()){
-                <i class="pi pi-times"></i>
-            }@else {
-                <i class="pi pi-bars"></i>
-                
-            }            
-        </button>
+            <div class="flex items-center w-20 justify-between">
+                <button routerLink="/tickets/nuevo" class="text-white text-3xl focus:outline-none">
+                    <i class="pi pi-plus"></i>                       
+                </button>            
+            <button (click)="uiService.toggleMenu()" class="text-white text-3xl focus:outline-none">        
+                @if (uiService.IsOpenMenu()){
+                    <i class="pi pi-times"></i>
+                }@else {
+                    <div class="flex">
+                        <i class="pi pi-bars"></i>
+                        
+                    </div>
+                                    
+                    
+                }            
+            </button>
+            </div>
+            
+        
+        
     </div>
 
     <!-- Dropdown Nav -->

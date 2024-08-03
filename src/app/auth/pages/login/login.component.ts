@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TypeAuth } from '@interfaces/usuario.interface';
 import { FireService } from '@services/firebase.service';
+import { UiService } from '@services/ui.service';
 import { UsuarioService } from '@services/usuario.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder)
 
   ngOnInit() {
+    this.uiService.setMenuStatus(false);
 
   }  
   loginForm = this.fb.group({
@@ -23,6 +25,7 @@ export class LoginComponent implements OnInit {
   });
   usuarioService = inject(UsuarioService);
   firebaseService = inject(FireService)
+  private uiService = inject(UiService);
 
 
 
