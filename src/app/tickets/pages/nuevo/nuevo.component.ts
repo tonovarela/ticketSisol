@@ -69,7 +69,8 @@ export class NuevoComponent implements OnInit {
       es_queja: this.solicitudForm.get('es_queja')!.value!,
       asignado: '---',
       situacion: 'En proceso',      
-      id_estado: 1
+      id_estado: 1,      
+
     };
     this.ticketService.registrar(ticket);
     this.solicitudForm.disable();

@@ -21,10 +21,9 @@ export class ListadoComponent implements OnInit {
   estados = this.ticketService.estados;  
 
 
-  ngOnInit(): void {    
-    this.ticketService.cargarTickets();
-    //this.ticketService.cargarCatalogos();
-    
+  ngOnInit(): void { 
+    const id_usuario = this.usuarioService.StateAuth().usuario?.id;    
+    this.ticketService.cargarTickets(id_usuario!);    
   } 
   
 

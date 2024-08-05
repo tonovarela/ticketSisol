@@ -12,6 +12,7 @@ export interface Ticket {
     asignado: string;    
     situacion: string;    
     id_estado: number;
+    color?: string;
     
 }
 
@@ -27,6 +28,7 @@ export interface SolicitudAlta {
 export interface Estado{
     id_estado: number;
     descripcion: string;
+    
 }
 
 

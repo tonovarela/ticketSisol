@@ -32,8 +32,8 @@ export class TicketService {
 
   }
 
-  cargarTickets() {
-     this.http.get<ResponseListadoTickets>(`${this.urlApi}/ticket`).subscribe(response => {   
+  cargarTickets(id_solicitante: string) {
+     this.http.get<ResponseListadoTickets>(`${this.urlApi}/ticket?id_solicitante=${id_solicitante}`).subscribe(response => {   
       // console.group('Tickets');      
       // console.table(response.tickets);
       // console.groupEnd();

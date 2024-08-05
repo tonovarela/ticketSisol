@@ -21,8 +21,10 @@
 
 }
 
-::ng-deep .p-datatable-wrapper {  
-  height: calc(70vh) !important;
+::ng-deep .p-datatable-wrapper {
+  @apply overflow-x-auto max-h-[75vh] xl:max-h-[85vh] lg:max-h-[80vh] md:max-h-[75vh];
+  /* height: calc(70vh) !important; */
+
 }
 
 
@@ -33,27 +35,120 @@
 
 }
 
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+:host ::ng-deep .p-datatable .p-datatable-thead>tr>th {
   position: -webkit-sticky;
   position: sticky;
-  top: 0rem;  
-  padding:  0.5rem;  
+  top: 0rem;
+  padding: 0.5rem;
   margin-right: 1rem;
-  
-  
-}
-:host ::ng-deep .p-datatable >td {
-  font-size: 5px;
-}
-::ng-deep  .p-inputtext {
-  padding: 0.2rem 0.4rem;  
-  @apply text-sm  ;
-  
+
+
 }
 
-::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+:host ::ng-deep .p-datatable>td {
+  font-size: 5px;
+}
+
+::ng-deep .p-inputtext {
+  padding: 0.2rem 0.4rem;
+  @apply text-xs;
+
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
   padding: 0.4rem 0.9rem;
 }
 
 
 
+.label-zone {
+  @apply inline-flex w-full justify-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset
+}
+
+
+.td-responsive {
+  @apply hidden md:table-cell;
+}
+
+
+
+.black {
+  @apply bg-gray-50 text-gray-600 ring-gray-500/10
+}
+
+.red {
+  @apply bg-red-50 text-red-600 ring-red-500/10
+}
+
+.yellow {
+  @apply bg-yellow-50 text-yellow-600 ring-yellow-500/10
+}
+
+.green {
+  @apply bg-green-50 text-green-600 ring-green-500/10
+}
+
+.blue {
+
+  @apply bg-blue-50 text-blue-600 ring-blue-500/10
+}
+
+
+.indigo {
+  
+  @apply bg-indigo-50 text-indigo-600 ring-indigo-500/10
+}
+
+.purple {
+  @apply bg-purple-50 text-purple-600 ring-purple-500/10
+}
+
+.pink {
+  @apply bg-pink-50 text-pink-600 ring-pink-500/10
+}
+
+.orange {
+  @apply bg-orange-50 text-orange-600 ring-orange-500/10
+}
+
+.cyan { 
+  @apply bg-cyan-50 text-cyan-600 ring-cyan-500/10
+}
+
+.slate {
+  @apply bg-slate-50 text-slate-600 ring-slate-500/10
+}
+
+.teal {
+  @apply bg-teal-50 text-teal-600 ring-teal-500/10
+}
+
+.lime {
+  @apply bg-lime-50 text-lime-600 ring-lime-500/10
+}
+.emerald {
+  @apply bg-emerald-50 text-emerald-600 ring-emerald-500/10
+}
+.sky {
+  @apply bg-sky-50 text-sky-600 ring-sky-500/10
+}
+
+.fuchsia {
+  @apply bg-fuchsia-50 text-fuchsia-600 ring-fuchsia-500/10
+}
+
+.violet {
+  @apply bg-violet-50 text-violet-600 ring-violet-500/10
+}
+
+.rose {
+  @apply bg-rose-50 text-rose-600 ring-rose-500/10
+}
+
+.amber {
+  @apply bg-amber-50 text-amber-600 ring-amber-500/10
+}
+
+.stone {
+  @apply bg-stone-50 text-stone-600 ring-stone-500/10
+}
