@@ -22,7 +22,7 @@
 }
 
 ::ng-deep .p-datatable-wrapper {
-  @apply overflow-x-auto max-h-[75vh] xl:max-h-[85vh] lg:max-h-[80vh] md:max-h-[75vh];
+  @apply overflow-x-auto h-[75vh] xl:h-[85vh] lg:h-[80vh] md:h-[75vh];
   /* height: calc(70vh) !important; */
 
 }
@@ -151,4 +151,9 @@
 
 .stone {
   @apply bg-stone-50 text-stone-600 ring-stone-500/10
+}
+
+.loader {
+  @apply animate-spin;
+  border-top-color: #3498db; /* Color del borde superior */
 }

@@ -1,6 +1,12 @@
-<div class=" h-auto mt-2 space-y-4  mx-auto">
+<div class=" h-auto mb-8 mt-2 space-y-4  mx-auto">
     <h1 class="text-2xl">Folio {{ticket.id_ticket}}</h1>
-
+    <div class="flex  flex-col sm:flex-row  ">
+        <label for="estado" class="label-ticket ">Registro</label>
+        <span class="w-full text-xs">
+            {{ticket.fecha_registro | date:'dd/MM/yyyy hh:mm '}}
+        </span>
+        
+    </div>  
     <div class="flex  flex-col sm:flex-row  ">
         <label for="estado" class="label-ticket ">Estado</label>
         <span class="w-full">
@@ -8,14 +14,14 @@
                 [(ngModel)]="ticket.id_estado" optionValue="id_estado">
                 <ng-template let-estado pTemplate="item">                    
                     <div class="flex justify-items-start  ">
-                        <div class="text-sm ">{{ estado.descripcion}}</div>
+                        <div class="text-xs ">{{ estado.descripcion}}</div>
                     </div>
                 </ng-template>
             </p-dropdown>
         </span>
-
-        <!-- <input pInputText id="estado" class="w-full input-disabled"  autocomplete="off" /> -->
+        
     </div>    
+     
     <div class="flex  flex-col sm:flex-row  ">
         <label for="compromiso" class="label-ticket ">Compromiso</label>    
         
@@ -27,7 +33,7 @@
             [disabled]="ticket.fecha_respuesta!=null"
             [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" 
             [ngModel]="ticket.fecha_respuesta"
-            inputStyleClass="text-sm  h-full p-2 "                         
+            inputStyleClass="text-sm   p-2  "                         
             (onSelect)="onDateChange($event)"                        
             [touchUI] ="isMobile"
             dateFormat="dd/mm/yy"            
@@ -56,6 +62,16 @@
     <div class="flex    flex-col sm:flex-row gap-1 ">
         <label for="zona" class="label-ticket">Zona</label>
         <input pInputText id="zona" class="w-full input-disabled" disabled [value]="ticket.zona" autocomplete="off" />
+    </div>    
+    <div class="flex   flex-col sm:flex-row mb-3">
+        <label for="categoria" class="label-ticket ">Categoria</label>
+        <input pInputText id="categoria" class="w-full input-disabled" [value]="ticket.categoria" disabled
+            autocomplete="off" />
+    </div>
+    <div class="flex   flex-col sm:flex-row ">
+        <label for="asignado" class="label-ticket ">Asignado a</label>
+        <input pInputText id="asignado" class="w-full input-disabled" [value]="ticket.asignado" disabled
+            autocomplete="off" />
     </div>
     <div class="flex   flex-col sm:flex-row ">
         <label for="titulo" class="label-ticket ">Título</label>
@@ -75,21 +91,20 @@
          id="titulo" class="w-full input-disabled " [value]="ticket.descripcion" disabled
             autocomplete="off" ></textarea>
     </div>
-    <div class="flex   flex-col sm:flex-row mb-3">
-        <label for="categoria" class="label-ticket ">Categoria</label>
-        <input pInputText id="categoria" class="w-full input-disabled" [value]="ticket.categoria" disabled
-            autocomplete="off" />
-    </div>
-    <div class="flex   flex-col sm:flex-row ">
-        <label for="asignado" class="label-ticket ">Asignado a</label>
-        <input pInputText id="asignado" class="w-full input-disabled" [value]="ticket.asignado" disabled
-            autocomplete="off" />
-    </div>
     
 
+  
+    
+</div>
 
-    <div class="flex justify-end  pt-20 space-x-4">
-        <p-button label="Cancelar" severity="secondary" (click)="onClose.emit()" />
-        <p-button label="Guardar"   (click)="actualizar()"/>
+
+
+<div class="  bg-white/65">
+    <div class="flex justify-end space-x-4    ">
+        <button pButton class="text-sm bg-secondary"   [outlined]="true" severity="secondary"  (click)="onClose.emit()" >
+            Cancelar
+            </button>
+        <button pButton class="text-sm"   (click)="actualizar()">Guardar</button>
+
     </div>
 </div>

@@ -4,6 +4,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { AvatarComponent } from './avatar/avatar.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { PrimeModule } from '@lib/prime.module';
 
 
 
@@ -20,6 +22,6 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     AvatarComponent
   ],
-  imports:[CommonModule,RouterModule]
+  imports:[CommonModule,RouterModule,FormsModule,PrimeModule]
 })
 export class SharedModule { }
