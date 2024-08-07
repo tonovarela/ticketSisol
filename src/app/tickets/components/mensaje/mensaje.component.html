@@ -1,29 +1,41 @@
-<div class="grid grid-cols-12">  
-  <div class=" p-3 rounded-lg" [ngClass]="{'col-start-1 col-end-8':!mensajeModel.propio,'col-start-6 col-end-13':mensajeModel.propio}">            
-        <ng-container>
-          <div class="flex items-center" [ngClass]="{'flex-row-reverse':mensajeModel.propio}"> 
-            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0 text-white">    
-              <app-avatar [url]="mensajeModel.avatar"/>        
-            </div>      
-            <div class="relative text-sm py-2 px-4 shadow rounded-xl" [ngClass]="{'bg-white-100 ml-3': !mensajeModel.propio,'bg-indigo-100 mr-3': mensajeModel.propio}">
-                @switch (mensajeModel.tipo) {
-                  @case('TEXTO'){
-                  <div>{{mensajeModel.mensaje}}</div>
-                  }
-                  @case('IMAGEN') {
-                  <p-image [src]="mensajeModel.archivo?.url" width="250" alt="Image" [preview]="true">
-                  </p-image>
-                  }
-                  @case('ARCHIVO') {
-                  <a target="_blank" href="{{mensajeModel.archivo?.url}}"
-                    class="text-blue-500">{{mensajeModel.archivo?.nombre}}</a>
-                  }
-                  @default { <p>{{mensajeModel.mensaje}}</p> }
-                  }    
-                </div>
-          </div>
-          <div class="mt-1 text-xs text-black rounded-md p-1 " [ngClass]="{'flex justify-end ':mensajeModel.propio}">{{mensajeModel.usuario}}</div>    
-          <div class=" text-xs text-black/25 rounded-md p-1 " [ngClass]="{'flex justify-end mr-5':mensajeModel.propio}">{{mensajeModel.fecha | date:'dd-MM-YYYY HH:mm'}}</div>
-          </ng-container>
-  </div>  
-</div>
+
+@if(mensajeModel.categoria=='SYSTEM') {
+  <div class="flex items-center justify-center">
+    <div class="flex flex-col  text-sm px-5 py-1 shadow rounded-xl bg-gray-200 text-black ring-gray-500/10" >
+    <span>{{mensajeModel.mensaje}}</span>
+    <span class="text-[10px] text-ellipsis text-center">{{mensajeModel.fecha | date:'dd-MM-YYYY HH:mm'}}</span>
+    </div>
+    
+  </div>
+}
+@else{
+  <div class="grid grid-cols-12">  
+    <div class=" p-3 rounded-lg" [ngClass]="{'col-start-1 col-end-8':!mensajeModel.propio,'col-start-6 col-end-13':mensajeModel.propio}">            
+          <ng-container>
+            <div class="flex items-center" [ngClass]="{'flex-row-reverse':mensajeModel.propio}"> 
+              <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0 text-white">    
+                <app-avatar [url]="mensajeModel.avatar"/>        
+              </div>      
+              <div class="relative text-sm py-2 px-4 shadow rounded-xl" [ngClass]="{'bg-white-100 ml-3': !mensajeModel.propio,'bg-indigo-100 mr-3': mensajeModel.propio}">
+                  @switch (mensajeModel.tipo) {
+                    @case('TEXTO'){
+                    <div>{{mensajeModel.mensaje}}</div>
+                    }
+                    @case('IMAGEN') {
+                    <p-image [src]="mensajeModel.archivo?.url" width="250" alt="Image" [preview]="true">
+                    </p-image>
+                    }
+                    @case('ARCHIVO') {
+                    <a target="_blank" href="{{mensajeModel.archivo?.url}}"
+                      class="text-blue-500">{{mensajeModel.archivo?.nombre}}</a>
+                    }
+                    @default { <p>{{mensajeModel.mensaje}}</p> }
+                    }    
+                  </div>
+            </div>
+            <div class="mt-1 text-xs text-black rounded-md p-1 " [ngClass]="{'flex justify-end ':mensajeModel.propio}">{{mensajeModel.usuario}}</div>    
+            <div class=" text-xs text-black/25 rounded-md p-1 " [ngClass]="{'flex justify-end mr-5':mensajeModel.propio}">{{mensajeModel.fecha | date:'dd-MM-YYYY HH:mm'}}</div>
+            </ng-container>
+    </div>  
+  </div>
+}

@@ -1,8 +1,9 @@
 
-import { Component, effect, EffectRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, computed, effect, EffectRef, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Mensaje, TipoMensaje } from '@interfaces/mensaje.interface';
+import { UsuarioService } from '@services/usuario.service';
 import { isMobile } from '@utils/mobileDetector';
 
 @Component({
@@ -17,6 +18,10 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   public isMobile = isMobile();
   public mensajes = signal<Mensaje[]>([]);
   nuevoMensaje: string = '';
+  private usuarioService =inject(UsuarioService);
+
+  urlphoto = computed(() => this.usuarioService.StateAuth().usuario!.photoURL || '');
+  username = computed(() => this.usuarioService.StateAuth().usuario!.username || '');
 
   @ViewChild('cameraRef') cameraRef: HTMLInputElement | undefined;
   @ViewChild('fileRef') fileRef: HTMLInputElement | undefined;
@@ -39,8 +44,10 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   cargarMensajes() {
     
     this.mensajes.set([
-      {avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'Gerente',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Informacion de ticket ', propio: false },      
-      {avatar:'https://github.com/shadcn.png',usuario:'Varela',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Adicional del ticket ', propio: true },      
+      {categoria:'SYSTEM',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Ticket registrado  ', propio: false },
+      {categoria:'USER',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'Gerente',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Informacion de ticket ', propio: false },            
+      {categoria:'SYSTEM',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Ticket cambio a pausado  ', propio: false },
+      {categoria:'USER',avatar:'https://github.com/shadcn.png',usuario:'Varela',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Adicional del ticket ', propio: true },      
     ]);
   }
 
@@ -49,7 +56,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     if (this.nuevoMensaje.trim().length === 0) {
       return;
     }
-    this.mensajes.set([...this.mensajes(), { avatar:'https://github.com/shadcn.png',usuario:'Varela',mensaje: this.nuevoMensaje, propio: true,id:this.mensajes().length.toString(),tipo:TipoMensaje.TEXTO,fecha:new Date }]);
+    this.mensajes.set([...this.mensajes(), {categoria:'USER', avatar:'https://github.com/shadcn.png',usuario:'Varela',mensaje: this.nuevoMensaje, propio: true,id:this.mensajes().length.toString(),tipo:TipoMensaje.TEXTO,fecha:new Date }]);
     this.nuevoMensaje = '';
   }
   onKeyUp(event: KeyboardEvent) {
@@ -88,6 +95,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
     
     this.mensajes.set([...this.mensajes(), { 
+      categoria:'USER',
       avatar:'https://github.com/shadcn.png',
       mensaje:'',
       usuario:'Varela',

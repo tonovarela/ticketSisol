@@ -1,4 +1,5 @@
 export interface  Mensaje {
+    categoria:'SYSTEM' | 'USER'
     usuario: string;
     mensaje: string;    
     archivo?:Archivo
