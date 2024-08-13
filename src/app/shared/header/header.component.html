@@ -1,7 +1,8 @@
 <!-- Desktop Header -->
 <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
     <div class="w-2/3">
-        <div class="my-2 w-full  ">
+
+        <div class="my-2 w-full"  *ngIf="mostrarFiltro">
             <div class="flex flex-row  justify-center  sm:mb-0">
                 <div class="relative">
                     <select (change)="actualizarListado($event,'total')" class="p-component appearance-none h-full rounded-l border block  w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">

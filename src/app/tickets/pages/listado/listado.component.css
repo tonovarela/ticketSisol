@@ -59,6 +59,10 @@
   padding: 0.4rem 0.9rem;
 }
 
+::ng-deep .bitacora .p-dialog .p-dialog-content{
+  padding: 0;
+  
+}
 
 
 .label-zone {

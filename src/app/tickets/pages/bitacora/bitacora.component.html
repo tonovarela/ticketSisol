@@ -1,9 +1,9 @@
-<div class="flex h-screen antialiased text-slate-800">
+<div class="flex h-screen  antialiased text-slate-800">
   <div class="absolute top-0 left-0 z-50 w-full   bg-black/75 text-white px-2 ">
     <div class="py-2">
       <div class="gap-3 flex">
-        <button routerLink="/tickets/listado" type="button"
-          class="  inline-flex items-center justify-center text-white hover:text-blue-500 ">
+        <button (click)="cerrar()" type="button"
+          class="  inline-flex items-center justify-center text-white hover:text-blue-500 focus:outline-none ">
           <i class="pi pi-chevron-left"></i>
         </button>        
         <app-avatar  [username]="username()" [url]="urlphoto()"></app-avatar>
@@ -25,23 +25,20 @@
         <div class="flex flex-row items-center h-16  bg-gray-600/10 w-full px-4">
           <div class="flex space-x-2 mr-1">
             @if(!isMobile){
-            <button (click)="fileRef.click()" class="text-gray-400 hover:text-gray-600 rounded-lg ">
+              <button (click)="fileRef.click()" class="text-gray-400 hover:text-gray-600 rounded-lg focus:outline-none  ">
               <i class="pi pi-paperclip"></i>
             </button>
             }
             @else{
               <div class="flex gap-3">
-                <button routerLink="/tickets/listado" class="text-gray-400 hover:text-gray-600 rounded-lg ">
+                <button (click)="cerrar()" class="text-gray-400 hover:text-gray-600 rounded-lg ">
                   <i class="pi pi-chevron-left"></i>
                 </button>
               <button (click)="cameraRef.click()"
                 class="flex items-center justify-center text-gray-400 hover:text-gray-600">
                 <app-camera-icon />
               </button>
-
-              </div>
-              
-
+              </div>              
             }
           </div>
           <div class="flex-grow ml-1">

@@ -1,5 +1,5 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { Categoria, Estado, ResponseCatalogo, ResponseListadoTickets, Ticket, Zona } from '../interfaces/ticket.interface';
+import { computed,  inject, Injectable, signal } from '@angular/core';
+import { Categoria, DocumentoAlta, Estado, ResponseBitacora, ResponseCatalogo, ResponseListadoTickets, Ticket, Zona } from '../interfaces/ticket.interface';
 import { environment } from 'src/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 
@@ -37,6 +37,11 @@ export class TicketService {
 
   }
 
+
+  bitacora(id_ticket:string){
+    return this.http.get<ResponseBitacora>(`${this.urlApi}/ticket/bitacora/${id_ticket}`)
+  }
+
   cargarTickets(id_solicitante: string,id_estado:number = 0) {
     
     this.cargando=true
@@ -48,9 +53,8 @@ export class TicketService {
      });      
   }
 
-  registrar(ticket: Ticket) {
-    
-    this.tickets.set([ticket,...this.tickets()]);    
+  registrar(ticket: Ticket, documento?: DocumentoAlta) {        
+    return this.http.post(`${this.urlApi}/ticket`,{ticket,documento :documento || null})    
   }
 
   actualizar(ticket: Ticket) {

@@ -1,5 +1,6 @@
 
 import { Component, computed, inject, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TicketService } from '@services/ticket.service';
 import { UiService } from '@services/ui.service';
 import { UsuarioService } from '@services/usuario.service';
@@ -12,8 +13,17 @@ import { debounceTime, Subject } from 'rxjs';
 
 export class HeaderComponent implements OnInit, OnDestroy {
   visible: boolean = false;
+  mostrarFiltro = true;
+  router = inject(Router)
   ngOnInit(): void {
     this.searchSubject.pipe(debounceTime(300)).subscribe((searchValue) => this.actualizarListado({ target: { value: searchValue } }, 'patron'));
+    this.router.events.subscribe((val) => {      
+      if (val instanceof NavigationEnd) {        
+        this.mostrarFiltro = val.url === '/tickets/listado'
+      }
+
+    });
+
   }
   ticketService = inject(TicketService);
   estados = computed(() => this.ticketService.estados());

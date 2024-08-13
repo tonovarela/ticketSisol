@@ -5,9 +5,12 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 
 
-import { Ticket } from '@interfaces/ticket.interface';
+import { DocumentoAlta, Ticket } from '@interfaces/ticket.interface';
 import { isMobile } from '@utils/mobileDetector';
 import { TicketService } from '@services/ticket.service';
+import { UsuarioService } from '@services/usuario.service';
+import { blobToBase64 } from '@utils/blobtoBase64';
+import { firstValueFrom } from 'rxjs';
 
 
 
@@ -19,18 +22,19 @@ import { TicketService } from '@services/ticket.service';
 })
 export class NuevoComponent implements OnInit {
 
-  previewUrl: { src: string, name: string, isImage: boolean } | null = null;
+  previewUrl: DocumentoAlta | undefined = undefined;
   fb = inject(FormBuilder);
   messageService = inject(MessageService);
   ticketService = inject(TicketService);
+  usuarioService = inject(UsuarioService);
   router = inject(Router);
 
   ngOnInit(): void {
   }
 
-  
-  public categorias= this.ticketService.categorias;
-  public zonas= this.ticketService.zonas;
+
+  public categorias = this.ticketService.categorias;
+  public zonas = this.ticketService.zonas;
 
   public isMobile = isMobile();
 
@@ -40,8 +44,6 @@ export class NuevoComponent implements OnInit {
     titulo: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required, Validators.maxLength(300)]),
     es_queja: new FormControl(false),
-    id_solicitante: ['5'],
-
 
   });
 
@@ -52,38 +54,44 @@ export class NuevoComponent implements OnInit {
   }
 
   async registrarSolicitud(event: Event) {
+
     event.preventDefault();
     this.solicitudForm.markAllAsTouched();
-    if (this.solicitudForm.invalid) {      
+    if (this.solicitudForm.invalid) {
       return;
     }
-    const ticket :Ticket ={
-      id_ticket: 'XXX',
-      zona: this.zonas.find(z=>z.id_zona.toString()==this.solicitudForm.get('id_zona')!.value!)?.descripcion!,
-      solicitante: "Marco Estelles",      
-      descripcion:"",
+    const id_solicitante = this.usuarioService.StateAuth().usuario?.id!;
+    const ticket: Ticket = {
+      id_solicitante: id_solicitante,
+      zona: this.zonas.find(z => z.id_zona.toString() == this.solicitudForm.get('id_zona')!.value!)?.descripcion!,
+      id_categoria: this.solicitudForm.get('id_categoria')!.value!,
+      id_zona: this.solicitudForm.get('id_zona')!.value!,
+      descripcion: this.solicitudForm.get('descripcion')!.value!,
       titulo: this.solicitudForm.get('titulo')!.value!,
       fecha_registro: new Date(),
       dias_respuesta: 0,
-      categoria:this.categorias.find(c=>c.id_categoria.toString()==this.solicitudForm.get('id_categoria')!.value!)?.descripcion!,
+      categoria: this.categorias.find(c => c.id_categoria.toString() == this.solicitudForm.get('id_categoria')!.value!)?.descripcion!,
       es_queja: this.solicitudForm.get('es_queja')!.value!,
-      asignado: '---',
-      situacion: 'En proceso',      
-      id_estado: 1,      
-
+      situacion: 'En proceso',
+      id_estado: 3,
     };
-    this.ticketService.registrar(ticket);
     this.solicitudForm.disable();
-    const promise = new Promise((resolve, reject) => setTimeout(() => {
-      resolve(true);
-    }, 1000));
-    await promise;
-    
-    this.messageService.add({ severity: 'success', summary: 'Listo', detail: 'Solicitud registrada', life: 3000 })
-    this.solicitudForm.enable();
-    this.solicitudForm.reset();
-    this.previewUrl = null;
-    this.router.navigate(['/tickets/listado']);    
+    try {
+      await firstValueFrom(this.ticketService.registrar(ticket, this.previewUrl));
+      this.messageService.add({ severity: 'success', summary: 'Listo', detail: 'Solicitud registrada', life: 3000 })
+
+    } catch (e) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo registrar la solicitud', life: 3000 })
+    } finally {
+      this.router.navigate(['/tickets/listado']);
+      this.solicitudForm.enable();
+      this.solicitudForm.reset();
+      this.previewUrl = undefined;
+    }
+
+
+
+
 
   }
 
@@ -95,7 +103,7 @@ export class NuevoComponent implements OnInit {
       && this.solicitudForm.get(nombreCampo)!.touched
   }
 
-  importarArchivo(event: Event) {
+  async importarArchivo(event: Event) {
     event.preventDefault();
     const input = event.target as HTMLInputElement;
     if (!input.files?.length || !this.solicitudForm.enable) {
@@ -106,7 +114,9 @@ export class NuevoComponent implements OnInit {
     const url = URL.createObjectURL(blob); // Crea un URL para el blob    
     const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp', 'image/svg+xml'];
     const isImage = validImageTypes.includes(file.type);
-    this.previewUrl = { src: url, name: file.name, isImage };
+
+    const stringBase64 = await blobToBase64(blob);
+    this.previewUrl = { src: url, name: file.name, isImage, type: file.type, base64: stringBase64 };
 
   }
 
@@ -114,7 +124,7 @@ export class NuevoComponent implements OnInit {
     if (!this.solicitudForm.enabled) {
       return
     }
-    this.previewUrl = null;
+    this.previewUrl = undefined;
   }
 
 

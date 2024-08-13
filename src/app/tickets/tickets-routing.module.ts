@@ -7,7 +7,7 @@ import { BitacoraComponent } from './pages/bitacora/bitacora.component';
 
 
 const routes: Routes = [
-  { path: 'bitacora/:id_ticket', component: BitacoraComponent },  
+  //{ path: 'bitacora/:id_ticket', component: BitacoraComponent },  
   {
   path: '', component: LayoutComponent,
   children: [
