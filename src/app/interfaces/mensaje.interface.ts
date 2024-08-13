@@ -11,7 +11,7 @@ export interface  Mensaje {
 }
 
 export interface Archivo {
-    url:string;
+    url: string ;
     nombre:string;
 }
 export enum TipoMensaje {

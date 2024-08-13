@@ -22,9 +22,9 @@
             <tr
                 class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-xs font-semibold  text-gray-600  tracking-wide">
                 <th class="text-sm   w-30">Folio</th>
-                <th class="text-sm   w-50"></th>
-                <th class="text-sm td-responsive w-64">Zona</th>
-                <th class="text-sm  w-15">Solicita</th>
+                <th class="text-sm  w-[100px]  sm:w-12"></th>
+                <th class="text-sm td-responsive  w-[200px]">Zona</th>
+                <th class="text-sm   w-[250px]">Solicita</th>
                 <th class="text-sm  w-[250px]">Título</th>
                 <th class="text-sm td-responsive  w-15">Registro</th>
                 <th class="text-sm td-responsive  w-15">Categoria</th>
@@ -37,8 +37,11 @@
         <ng-template pTemplate="body" let-ticket>
             <tr>
                 <td class="text-[10px] sm:text-xs text-center ">{{ ticket.id_ticket }} </td>
-                <td class="text-xs">
-                    <app-messages-icon (click)="verBitacora(ticket.id_ticket)" />
+                <td class="text-xs ">
+                    <div class="flex justify-center">
+                        <app-messages-icon (click)="verBitacora(ticket.id_ticket)" />
+                    </div>
+                    
                 </td>
 
                 <td class="td-responsive">
@@ -112,7 +115,7 @@ class="bitacora"  #dialog (onShow)="dialog.maximize()"
 [style]="{ width: '100vw' }"
     [closeOnEscape]="false" [closable]="false" [dismissableMask]="false">    
     @if (bitacoraTicket!=undefined){
-    <app-bitacora [id_ticket]="bitacoraTicket" [mensajes]="mensajesDetalle()" (onClose)="cerrarBitacora()"></app-bitacora>
+    <app-bitacora [id_ticket]="bitacoraTicket" [messages]="mensajesDetalle" (onNewMessage)="nuevoMensaje($event)" (onClose)="cerrarBitacora()"></app-bitacora>
     }
 
 </p-dialog>

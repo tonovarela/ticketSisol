@@ -15,12 +15,13 @@ export class BitacoraComponent implements OnInit, OnDestroy {
 
 
   @Input('id_ticket') id_ticket: string = '0';
-  @Input('mensajes') mensajesInput: Mensaje[] = [];
-  @Output('onClose') cerrarBitacora = new EventEmitter<void>();
+  @Input('messages') mensajes = signal<Mensaje[]>([]);
+  @Output('onClose') onClose = new EventEmitter<void>();
+  @Output('onNewMessage') onNuevoMensaje = new EventEmitter<Mensaje>();
 
 
   public isMobile = isMobile();
-  public mensajes = signal<Mensaje[]>([]);
+  
   nuevoMensaje: string = '';
   private usuarioService = inject(UsuarioService);
 
@@ -38,21 +39,21 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   });
 
 
-  ngOnInit(): void {    
-    this.mensajes.set(this.mensajesInput);
+  ngOnInit(): void {
+  
   }
 
 
   enviarMensaje() {
     if (this.nuevoMensaje.trim().length === 0) {
       return;
-    }
-
-    this.mensajes.set([...this.mensajes(), {
-      categoria: 'USER',
-      avatar: this.urlphoto(), usuario: this.username(),
-      mensaje: this.nuevoMensaje, propio: true, id: this.mensajes().length.toString(), tipo: TipoMensaje.TEXTO, fecha: new Date
-    }]);
+    }    
+    this.onNuevoMensaje.emit({
+        categoria: 'USER',
+        avatar: this.urlphoto(), usuario: this.username(),
+        mensaje: this.nuevoMensaje, propio: true, id: this.mensajes().length.toString(), tipo: TipoMensaje.TEXTO, fecha: new Date
+      }
+    );
     this.nuevoMensaje = '';
   }
   onKeyUp(event: KeyboardEvent) {
@@ -85,12 +86,9 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     //TODO: subir archivo
     const file = input.files[0];
     const blob = new Blob([file], { type: file.type }); // Crea un blob a partir del archivo
-    const url = URL.createObjectURL(blob); // Crea un URL para el blob    
-    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp', 'image/svg+xml'];
-    const isImage = validImageTypes.includes(file.type);
-
-
-    this.mensajes.set([...this.mensajes(), {
+    const url = URL.createObjectURL(blob); // Crea un URL para el blob        
+    const isImage = file.type.includes('image');
+    const mensaje: Mensaje = {
       categoria: 'USER',
       avatar: this.urlphoto(), usuario: this.username(),
       mensaje: '',
@@ -102,11 +100,12 @@ export class BitacoraComponent implements OnInit, OnDestroy {
       id: this.mensajes().length.toString(),
       tipo: isImage ? TipoMensaje.IMAGEN : TipoMensaje.ARCHIVO,
       fecha: new Date
-    }]);
+    };
+    this.onNuevoMensaje.emit(mensaje);    
   }
 
   cerrar() {
-    this.cerrarBitacora.emit();
+    this.onClose.emit();
   }
 
 

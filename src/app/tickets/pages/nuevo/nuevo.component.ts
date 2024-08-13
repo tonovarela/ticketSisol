@@ -116,7 +116,7 @@ export class NuevoComponent implements OnInit {
     const isImage = validImageTypes.includes(file.type);
 
     const stringBase64 = await blobToBase64(blob);
-    this.previewUrl = { src: url, name: file.name, isImage, type: file.type, base64: stringBase64 };
+    this.previewUrl = { src: url, name: file.name, isImage, type: file.type, base64: stringBase64.split(",")[1] };
 
   }
 

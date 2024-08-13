@@ -80,6 +80,7 @@ export interface ResponseBitacora {
 export interface Bitacora {
     id_ticket:      string;
     mensaje:        string;
+    foto:           string;
     extension:      string;
     movimiento:     string;
     fecha_registro: Date;

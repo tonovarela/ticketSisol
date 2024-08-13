@@ -7,8 +7,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TicketService {
-  private tickets =signal<Ticket[]>([]);
-  //private ticketsBkp :Ticket[] = [];
+  private tickets =signal<Ticket[]>([]);  
   http = inject(HttpClient)
   estados =signal<Estado[]>([]);
 
@@ -21,11 +20,9 @@ export class TicketService {
   patron = signal('');
 
   Tickets = computed(() => this.tickets());
-  constructor() {
-   
-    this.cargarCatalogos();
-  
 
+  constructor() {   
+    this.cargarCatalogos();
   }
 
   cargarCatalogos() {
@@ -59,6 +56,23 @@ export class TicketService {
 
   actualizar(ticket: Ticket) {
     this.tickets.set(this.tickets().map(t => t.id_ticket === ticket.id_ticket ? ticket : t));
+  }
+
+  registrarNota(nota:{id_ticket:string,
+                        id_usuario:string,
+                        mensaje:string,
+                        }) {
+    return this.http.post<{id:string}>(`${this.urlApi}/ticket/nota`,{nota})
+  }
+
+  registrarDocumento(documento: {
+    id_ticket:string,
+    base64string:string,
+    name:string,
+    extension:string
+    id_usuario:string
+  }) {
+  return this.http.post<{id:string}>(`${this.urlApi}/documento`,{documento})
   }
 
   
