@@ -18,6 +18,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
   @Input('messages') mensajes = signal<Mensaje[]>([]);
   @Output('onClose') onClose = new EventEmitter<void>();
   @Output('onNewMessage') onNuevoMensaje = new EventEmitter<Mensaje>();
+  @Input('loading') loading = signal<boolean>(false);
 
 
   public isMobile = isMobile();
@@ -67,7 +68,7 @@ export class BitacoraComponent implements OnInit, OnDestroy {
     const element = document.getElementById('bottom');
     setTimeout(() => {
       element!.scrollTo({ top: element!.scrollHeight, behavior: 'smooth' });
-    }, 100);
+    }, 500);
   }
 
 

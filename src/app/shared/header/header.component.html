@@ -73,12 +73,15 @@
                  Tickets | SISOL</a>
         
             <div class="flex items-center  justify-between space-x-8">
-                <button  class="text-white  focus:outline-none">
-                    <i class="pi pi-filter" (click)="mostrarModalFiltro()" ></i>                       
-                </button>            
-                <button routerLink="/tickets/nuevo" class="text-white  focus:outline-none">
-                    <i class="pi pi-plus"></i>                       
-                </button>            
+                @if(mostrarFiltro){
+                    <button   class="text-white  focus:outline-none">
+                        <i class="pi pi-filter" (click)="mostrarModalFiltro()" ></i>                       
+                    </button>            
+                    <button routerLink="/tickets/nuevo" class="text-white  focus:outline-none">
+                        <i class="pi pi-plus"></i>                       
+                    </button>            
+                }
+                
             <button (click)="uiService.toggleMenu()" class="text-white text-sm focus:outline-none">        
                 @if (uiService.IsOpenMenu()){
                     <i class="pi pi-times"></i>

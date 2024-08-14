@@ -11,7 +11,9 @@
         <label for="estado" class="label-ticket ">Estado</label>
         <span class="w-full">
             <p-dropdown [options]="estados()" styleClass="text-sm uppercase min-w-full  " optionLabel="descripcion"
-                [(ngModel)]="ticket.id_estado" optionValue="id_estado">
+                [(ngModel)]="ticket.id_estado" optionValue="id_estado"
+                
+                >
                 <ng-template let-estado pTemplate="item">                    
                     <div class="flex justify-items-start  ">
                         <div class="text-xs ">{{ estado.descripcion}}</div>

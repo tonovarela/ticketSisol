@@ -111,11 +111,11 @@
 
 <p-dialog
 class="bitacora"  #dialog (onShow)="dialog.maximize()"
-[visible]="bitacoraTicket!=undefined" [modal]="false" [showHeader]="false" [draggable]="false"  
-[style]="{ width: '100vw' }"
-    [closeOnEscape]="false" [closable]="false" [dismissableMask]="false">    
-    @if (bitacoraTicket!=undefined){
-    <app-bitacora [id_ticket]="bitacoraTicket" [messages]="mensajesDetalle" (onNewMessage)="nuevoMensaje($event)" (onClose)="cerrarBitacora()"></app-bitacora>
+[visible]="id_ticketActivo!=undefined" [modal]="false" [showHeader]="false" [draggable]="false"  
+[style]="{ width: '100vw' }" 
+    [closeOnEscape]="true"  [closable]="false" [dismissableMask]="false">    
+    @if (id_ticketActivo!=undefined){
+    <app-bitacora   [loading]="cargandoMensajes" [id_ticket]="id_ticketActivo" [messages]="mensajesDetalle" (onNewMessage)="nuevoMensaje($event)" (onClose)="cerrarBitacora()"></app-bitacora>
     }
 
 </p-dialog>

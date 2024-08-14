@@ -18,25 +18,25 @@ export class ListadoComponent implements OnInit {
   firebaseService = inject(FireService);
   usuarioService = inject(UsuarioService);
   ticketService = inject(TicketService);
+  cargandoMensajes = signal<boolean>(false);
+
 
   mensajesDetalle = signal<Mensaje[]>([]);
-
   tickets: Ticket[] = [];
   ticketsBkp: Ticket[] = [];
-  bitacoraTicket: string | undefined;
-
+  id_ticketActivo: string | undefined;
   estados = this.ticketService.estados;
-
+  id_usuario = "0";
+  first = 0;
   rows = computed(() => this.ticketService.totalRows());
   ticketDetalle: Ticket | undefined;
-  id_usuario = "0";
   cargandoTickets = this.ticketService.cargando;
-  first = 0;
+  
 
   ngOnInit(): void {
     this.id_usuario = this.usuarioService.StateAuth().usuario?.id.toString() || "0";
     this.ticketService.cargarTickets(this.id_usuario);
-
+  
   }
 
 
@@ -51,7 +51,6 @@ export class ListadoComponent implements OnInit {
       this.ticketService.cargarTickets(this.id_usuario, id_estado);
 
     })
-
     effect(() => {
       const patron = this.ticketService.patron();
       if (patron.length > 0) {
@@ -111,9 +110,11 @@ export class ListadoComponent implements OnInit {
 
 
   async verBitacora(id_ticket: string) {
+    this.cargandoMensajes.set(true);
     const resp = await firstValueFrom(this.ticketService.bitacora(id_ticket))
     const mensajes = this.construirHistorialMensajes(resp.bitacora);
     this.mensajesDetalle.set(mensajes)
+    this.cargandoMensajes.set(false);
     // [
     //   {categoria:'SYSTEM',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Ticket registrados  ', propio: false },
     //   {categoria:'USER',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'Gerente',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Informacion de ticket ', propio: false },            
@@ -121,10 +122,10 @@ export class ListadoComponent implements OnInit {
     //   {categoria:'USER',avatar:'https://github.com/shadcn.png',usuario:'Varela',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Adicional del ticket ', propio: true },      
     // ]
 
-    this.bitacoraTicket = id_ticket
+    this.id_ticketActivo = id_ticket
   }
   cerrarBitacora() {
-    this.bitacoraTicket = undefined
+    this.id_ticketActivo = undefined
   }
 
 
@@ -166,10 +167,11 @@ export class ListadoComponent implements OnInit {
   }
 
   async nuevoMensaje(nuevoMensaje: Mensaje) {
+    this.cargandoMensajes.set(true);
     let idMensaje = '';
     if (nuevoMensaje.tipo == TipoMensaje.TEXTO) {
       const resp = await firstValueFrom(this.ticketService.registrarNota({
-        id_ticket: this.bitacoraTicket || '',
+        id_ticket: this.id_ticketActivo || '',
         id_usuario: this.id_usuario,
         mensaje: nuevoMensaje.mensaje
       }));
@@ -181,13 +183,14 @@ export class ListadoComponent implements OnInit {
         name: nuevoMensaje.archivo!.nombre,
         base64string: base64string.split(',')[1],
         extension: blob.type,
-        id_ticket: this.bitacoraTicket || '',
+        id_ticket: this.id_ticketActivo || '',
         id_usuario: this.id_usuario
       }));
       idMensaje = resp.id;
     }
     nuevoMensaje.id = idMensaje;
     this.mensajesDetalle.set([...this.mensajesDetalle(), nuevoMensaje]);
+    this.cargandoMensajes.set(false);
   }
 
 }
