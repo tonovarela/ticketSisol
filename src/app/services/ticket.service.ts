@@ -1,7 +1,8 @@
 import { computed,  inject, Injectable, signal } from '@angular/core';
-import { Categoria, DocumentoAlta, Estado, ResponseBitacora, ResponseCatalogo, ResponseListadoTickets, Ticket, Zona } from '../interfaces/ticket.interface';
-import { environment } from 'src/environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.development';
+
+import { Categoria, DocumentoAlta, Estado, ResponseBitacora, ResponseCatalogo, ResponseListadoTickets, Ticket, Zona } from '../interfaces/ticket.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class TicketService {
   totalRows = signal(20);
   estadoFiltro = signal(-1);
   patron = signal('');
+
+  vistaPreviaImagenChat = signal(false); 
+  
 
   Tickets = computed(() => this.tickets());
 

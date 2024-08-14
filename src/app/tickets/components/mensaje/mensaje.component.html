@@ -26,8 +26,11 @@
                     <div>{{mensajeModel.mensaje}}</div>
                     }
                     @case('IMAGEN') {
-                    <p-image [src]="mensajeModel.archivo?.url" width="250" alt="Image" [preview]="true">
-                    </p-image>
+                      <div class="loading  bg-red-500">
+                        <p-image  (onShow)="mostrarImagen(true)" (onHide)="mostrarImagen(false)" [src]="mensajeModel.archivo?.url" width="250" alt="Image" [preview]="true">
+                        </p-image>
+                      </div>
+                    
                     }
                     @case('ARCHIVO') {
                     <a target="_blank" href="{{mensajeModel.archivo?.url}}"

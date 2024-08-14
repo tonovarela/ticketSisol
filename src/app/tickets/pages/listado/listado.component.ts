@@ -35,7 +35,10 @@ export class ListadoComponent implements OnInit {
   
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
-    this.cerrarBitacora();
+    if (!this.ticketService.vistaPreviaImagenChat()){
+       this.cerrarBitacora();
+    }
+    
 }
 
   ngOnInit(): void {
