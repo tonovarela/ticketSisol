@@ -7,6 +7,7 @@ import { TicketService } from '@services/ticket.service';
 import { UsuarioService } from '@services/usuario.service';
 import { blobToBase64 } from '@utils/blobtoBase64';
 import { firstValueFrom } from 'rxjs';
+import { HostListener } from '@angular/core';
 
 
 @Component({
@@ -33,9 +34,14 @@ export class ListadoComponent implements OnInit {
   cargandoTickets = this.ticketService.cargando;
   
 
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.cerrarBitacora();
+}
+
   ngOnInit(): void {
     this.id_usuario = this.usuarioService.StateAuth().usuario?.id.toString() || "0";
     this.ticketService.cargarTickets(this.id_usuario);
+    
   
   }
 
@@ -124,6 +130,8 @@ export class ListadoComponent implements OnInit {
 
     this.id_ticketActivo = id_ticket
   }
+
+
   cerrarBitacora() {
     this.id_ticketActivo = undefined
   }
