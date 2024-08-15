@@ -57,6 +57,7 @@ export interface Categoria {
 export interface OnUpdateTicketModel {
     ticket: Ticket;
     cambioFechaCompromiso: boolean;
+    motivo?:string
 }
 
 

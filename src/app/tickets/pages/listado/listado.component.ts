@@ -53,7 +53,7 @@ export class ListadoComponent implements OnInit {
   constructor() {
     effect(() => {
       this.tickets = this.ticketService.Tickets();
-      this.ticketsBkp = this.ticketService.Tickets();
+      this.ticketsBkp = this.ticketService.Tickets();      
     });
     effect(() => {
       const id_estado = this.ticketService.estadoFiltro();
@@ -106,9 +106,14 @@ export class ListadoComponent implements OnInit {
     this.ticketDetalle = ticket
   }
 
-  actualizarTicket({ ticket, cambioFechaCompromiso }: OnUpdateTicketModel) {
-    this.ticketService.actualizar(ticket);
-    this.ticketDetalle = undefined;
+  async actualizarTicket({ ticket, cambioFechaCompromiso,motivo }: OnUpdateTicketModel) {
+    const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;            
+    
+    if (cambioEstado || cambioFechaCompromiso) {        
+      await this.ticketService.actualizar(ticket,motivo||'',this.id_usuario);
+    }          
+    this.cerrarDetalle();
+    
   }
   cerrarDetalle() {
     this.ticketDetalle = undefined;
@@ -124,13 +129,6 @@ export class ListadoComponent implements OnInit {
     const mensajes = this.construirHistorialMensajes(resp.bitacora);
     this.mensajesDetalle.set(mensajes)
     this.cargandoMensajes.set(false);
-    // [
-    //   {categoria:'SYSTEM',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Ticket registrados  ', propio: false },
-    //   {categoria:'USER',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'Gerente',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Informacion de ticket ', propio: false },            
-    //   {categoria:'SYSTEM',avatar:'https://servicios.litoprocess.com/colaboradores/api/foto/3361',usuario:'',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Ticket cambio a pausado  ', propio: false },
-    //   {categoria:'USER',avatar:'https://github.com/shadcn.png',usuario:'Varela',tipo:TipoMensaje.TEXTO, fecha:new Date,id:'1',mensaje: 'Adicional del ticket ', propio: true },      
-    // ]
-
     this.id_ticketActivo = id_ticket
   }
 
