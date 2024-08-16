@@ -4,11 +4,13 @@ export interface Ticket {
     id_categoria?: string;
     zona: string;
     id_solicitante: string;
+    id_responsable?: string;
     solicitante?: string;
     titulo: string;
     fecha_registro: Date;
     dias_respuesta: number;
     fecha_respuesta?: Date;
+    motivoCancelacion?: string;
     descripcion: string;
     categoria: string;
     es_queja: boolean;
@@ -58,11 +60,17 @@ export interface OnUpdateTicketModel {
     ticket: Ticket;
     cambioFechaCompromiso: boolean;
     motivo?:string
+    cambioEstado?: boolean;
+    id_usuario?:string
 }
+
+
+
 
 
 export interface ResponseListadoTickets {
     tickets: Ticket[];
+    tipoUsuario: string;
 }
 
 export interface ResponseCatalogo {

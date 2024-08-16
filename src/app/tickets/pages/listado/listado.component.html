@@ -104,7 +104,9 @@
 <p-dialog [visible]="ticketDetalle !=undefined" [modal]="true" [showHeader]="false" [draggable]="false" position="top"
     [closeOnEscape]="true" [closable]="false" [dismissableMask]="false"
     [breakpoints]="{'1320px':'70vw','1199px': '70vw', '700px': '70vw', '575px': '90vw' }" [style]="{ width: '20vw' }">
-    <app-detalle *ngIf="ticketDetalle" [catalogoEstados]="estados()" [ticket]="ticketDetalle"
+    
+    
+    <app-detalle *ngIf="ticketDetalle" [puedeEditar]="puedeEditarTicket"  [catalogoEstados]="estados()" [ticket]="ticketDetalle"
         (onClose)="cerrarDetalle()" (onUpdate)="actualizarTicket($event)">
     </app-detalle>
 </p-dialog>
@@ -115,6 +117,7 @@ class="bitacora"  #dialog (onShow)="dialog.maximize()"
 [style]="{ width: '100vw' }" 
     [closeOnEscape]="true"  [closable]="false" [dismissableMask]="false">    
     @if (id_ticketActivo!=undefined){
+        
     <app-bitacora   [loading]="cargandoMensajes" [id_ticket]="id_ticketActivo" [messages]="mensajesDetalle" (onNewMessage)="nuevoMensaje($event)" (onClose)="cerrarBitacora()"></app-bitacora>
     }
 

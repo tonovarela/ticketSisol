@@ -16,7 +16,9 @@
     <div class="flex  flex-col sm:flex-row  ">
         <label for="estado" class="label-ticket ">Estado</label>
         <span class="w-full">
-            <p-dropdown [options]="estados()" styleClass="text-sm uppercase min-w-full  " optionLabel="descripcion"
+            <p-dropdown [options]="estados()" styleClass="text-sm uppercase min-w-full" 
+            [disabled]="!puedeEditar()"
+            optionLabel="descripcion"
                 [(ngModel)]="ticket.id_estado" optionValue="id_estado">
                 <ng-template let-estado pTemplate="item">
                     <div class="flex justify-items-start  ">
@@ -29,8 +31,9 @@
     @if(ticket.id_estado==11){
     <div class="flex   flex-col sm:flex-row ">
         <label for="motivo" class="label-ticket ">Motivo</label>
-        <textarea pInputTextarea rows="3" [autoResize]="false" id="titulo" 
+        <textarea pInputTextarea rows="3" [ngModel]="ticket.motivoCancelacion" [autoResize]="false" id="titulo" 
         [class]="esMotivoRequerido?'ng-invalid ng-dirty':''" 
+        [disabled]="!puedeEditar()"
         #motivo class="w-full" autocomplete="off"></textarea>
     </div>
     }
@@ -39,10 +42,11 @@
         <span class="w-full">           
             
             <p-calendar [minDate]="ticket.fecha_respuesta || today" [appendTo]="'body'"
-                [class]="esFechaRequerida?'ng-invalid ng-dirty':''" [disabled]="ticket.fecha_respuesta!=null"
+                [class]="esFechaRequerida?'ng-invalid ng-dirty':''" [disabled]="ticket.fecha_respuesta!=null || !puedeEditar()"
                 [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [ngModel]="ticket.fecha_respuesta"
                 placeholder="Sin fecha" inputStyleClass="text-sm   p-2 focus:outline-none"
                 (onSelect)="onDateChange($event)" [touchUI]="isMobile" dateFormat="dd/mm/yy"
+                
                 [readonlyInput]="true"></p-calendar>
         </span>
     </div>
@@ -103,7 +107,7 @@
         <button pButton class="text-sm bg-secondary" [outlined]="true" severity="secondary" (click)="onClose.emit()">
             Cancelar
         </button>
-        <button pButton class="text-sm" (click)="actualizar()">Guardar</button>
+        <button pButton class="text-sm" [disabled]="!puedeEditar()" (click)="actualizar()">Guardar</button>
 
     </div>
 </div>

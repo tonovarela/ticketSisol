@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
 
-import { Categoria, DocumentoAlta, Estado, ResponseBitacora, ResponseCatalogo, ResponseListadoTickets, Ticket, Zona } from '../interfaces/ticket.interface';
+import { Categoria, DocumentoAlta, Estado, OnUpdateTicketModel, ResponseBitacora, ResponseCatalogo, ResponseListadoTickets, Ticket, Zona } from '../interfaces/ticket.interface';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -13,6 +13,9 @@ export class TicketService {
   http = inject(HttpClient)
   estados = signal<Estado[]>([]);
 
+
+  tipoUsuario = signal('3') ;  
+
   urlApi = environment.urlApi;
   categorias: Categoria[] = [];
   zonas: Zona[] = [];
@@ -20,6 +23,7 @@ export class TicketService {
   totalRows = signal(20);
   estadoFiltro = signal(-1);
   patron = signal('');
+
 
   vistaPreviaImagenChat = signal(false);
 
@@ -32,6 +36,7 @@ export class TicketService {
 
   cargarCatalogos() {
     this.http.get<ResponseCatalogo>(`${this.urlApi}/ticket/catalogos`).subscribe(catalogos => {
+
       this.estados.set(catalogos.estados);
       this.categorias = catalogos.categorias;
       this.zonas = catalogos.zonas;
@@ -48,6 +53,7 @@ export class TicketService {
 
     this.cargando = true
     this.http.get<ResponseListadoTickets>(`${this.urlApi}/ticket?id_solicitante=${id_solicitante}&id_estado=${id_estado == 0 ? 'ALL' : id_estado}`).subscribe(response => {
+      this.tipoUsuario.set(response.tipoUsuario);
       this.cargando = false;
       this.tickets.set([]);
       this.tickets.set(response.tickets.map(t => ({
@@ -61,12 +67,13 @@ export class TicketService {
     return this.http.post(`${this.urlApi}/ticket`, { ticket, documento: documento || null })
   }
 
-  async actualizar(ticket: Ticket,motivo:string,id_usuario:string) {
+  async actualizar(updateTicketModel:OnUpdateTicketModel) {
     try {
-      await firstValueFrom(this.http.patch(`${this.urlApi}/ticket`, {ticket,motivo,id_usuario}));      
+      const {ticket} =updateTicketModel
+      await firstValueFrom(this.http.patch(`${this.urlApi}/ticket`, {...updateTicketModel}));      
       this.tickets.set(this.tickets().map(t => t.id_ticket === ticket.id_ticket ? ticket : t));
     } catch (e) {
-      console.log(e);
+      
     }
 
   }

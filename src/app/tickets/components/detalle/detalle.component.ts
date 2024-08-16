@@ -21,6 +21,7 @@ export class DetalleComponent implements OnInit {
   @Input('catalogoEstados') catalogoEstados: Estado[] = [];
   @Input('ticket') ticketParam!: Ticket;
   @Output('onClose') onClose = new EventEmitter<void>();
+  @Input('puedeEditar') puedeEditar = signal<boolean>(false);
   @Output('onUpdate') onUpdate = new EventEmitter<OnUpdateTicketModel>();
   @ViewChild('motivo') motivo:any;
 

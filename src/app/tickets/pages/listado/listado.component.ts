@@ -41,11 +41,10 @@ export class ListadoComponent implements OnInit {
     
 }
 
+puedeEditarTicket= signal<boolean>(false);
+
   ngOnInit(): void {
-    this.id_usuario = this.usuarioService.StateAuth().usuario?.id.toString() || "0";
-    this.ticketService.cargarTickets(this.id_usuario);
-    
-  
+    this.id_usuario = this.usuarioService.StateAuth().usuario?.id.toString() || "0";    
   }
 
 
@@ -104,13 +103,14 @@ export class ListadoComponent implements OnInit {
 
   verDetalle(ticket: Ticket) {
     this.ticketDetalle = ticket
+    this.puedeEditarTicket.set(this.ticketService.tipoUsuario()=="1" || ticket.id_responsable==this.id_usuario);
   }
 
   async actualizarTicket({ ticket, cambioFechaCompromiso,motivo }: OnUpdateTicketModel) {
     const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;            
     
     if (cambioEstado || cambioFechaCompromiso) {        
-      await this.ticketService.actualizar(ticket,motivo||'',this.id_usuario);
+      await this.ticketService.actualizar({ticket,motivo:motivo||'',id_usuario:this.id_usuario,cambioFechaCompromiso,cambioEstado});
     }          
     this.cerrarDetalle();
     

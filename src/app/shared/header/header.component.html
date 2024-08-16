@@ -23,7 +23,7 @@
                     <select (change)="actualizarListado($event,'estados')" class="h-full 
                     p-component text-sm font-normal border-t border-l-0  border-r border-b  block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none  focus:bg-white focus:border-gray-500">
                         <option [value]="0">TODOS</option>
-                        <option [value]="-1" selected>PENDIENTES</option>                        
+                        <option [value]="-1" selected>ABIERTOS</option>                        
                         @for(estado of estados();track estado.id_estado){
                             <option [value]="estado.id_estado">{{estado.descripcion}}</option>
                         }
