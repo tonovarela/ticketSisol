@@ -70,6 +70,7 @@ puedeEditarTicket= signal<boolean>(false);
           || t.solicitante?.toLowerCase().includes(patron.toLowerCase())
           || t.asignado?.toLowerCase().includes(patron.toLowerCase())
           || t.categoria.toLowerCase().includes(patron.toLowerCase())
+          || t.zona.toLowerCase().includes(patron.toLowerCase())
           
         );
       } else {
