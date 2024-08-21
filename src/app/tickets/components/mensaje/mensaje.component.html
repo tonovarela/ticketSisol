@@ -14,7 +14,9 @@
 }
 @else{
   <div class="grid grid-cols-12">  
-    <div class=" p-3 rounded-lg" [ngClass]="{'col-start-1 col-end-8':!mensajeModel.propio,'col-start-6 col-end-13':mensajeModel.propio}">            
+    <div class=" p-3 rounded-lg  col-start-1  col-end-12 "
+     [ngClass]="{'md:col-start-1 md:col-end-8':!mensajeModel.propio,
+                'md:col-start-6 md:col-end-12':mensajeModel.propio}">            
           <ng-container>
             <div class="flex items-center" [ngClass]="{'flex-row-reverse':mensajeModel.propio}"> 
               <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0 text-white">    
