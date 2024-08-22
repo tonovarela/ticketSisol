@@ -12,7 +12,7 @@
                     </div>
                 </ng-template>
             </p-dropdown>
-            <p-dropdown [options]="zonas" placeholder="Seleccione una zona" formControlName="id_zona"
+            <p-dropdown [options]="zonas()" placeholder="Seleccione una zona" formControlName="id_zona"
                 [class]="campoValido('id_zona')?'ng-dirty ng-invalid':''"
                 styleClass="w-full h-10 text-gray-600   text-sm mt-2 mb-5 flex items-center" optionLabel="descripcion"
                 optionValue="id_zona">

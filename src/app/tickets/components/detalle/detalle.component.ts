@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { PrimeModule } from '@lib/prime.module';
 import { Component, EventEmitter, Input, OnInit, Output, signal, ViewChild } from '@angular/core';
-import { Estado, OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interface';
+import { Estado, OnUpdateTicketModel, Ticket, Zona } from '@interfaces/ticket.interface';
 import { isMobile } from '../../../utils/mobileDetector';
 import { CALENDAR_LANG_ES } from 'src/app/conf/locale';
 
@@ -19,6 +19,7 @@ import { CALENDAR_LANG_ES } from 'src/app/conf/locale';
 
 export class DetalleComponent implements OnInit {
   @Input('catalogoEstados') catalogoEstados: Estado[] = [];
+  @Input('catalogoZonas') catalogoZonas: Zona[] = [];
   @Input('ticket') ticketParam!: Ticket;
   @Output('onClose') onClose = new EventEmitter<void>();
   @Input('puedeEditar') puedeEditar = signal<boolean>(false);
@@ -35,8 +36,10 @@ export class DetalleComponent implements OnInit {
   estados = signal<Estado[]>([]);
   isMobile = isMobile();
   cambioFechaCompromiso = false;
+  
 
   ngOnInit(): void {
+    console.log(this.catalogoZonas);
     this.ticket = { ...this.ticketParam };
     if (this.ticket.fecha_respuesta != null  && !(this.ticket.fecha_respuesta instanceof Date)) {            
         const [year, month, day] = (this.ticket.fecha_respuesta as string).split('-').map(Number);

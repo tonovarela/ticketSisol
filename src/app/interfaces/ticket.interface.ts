@@ -1,7 +1,7 @@
 export interface Ticket {
     id_ticket?: string;
     id_zona?: string;
-    id_categoria?: string;
+    id_categoria?: string;    
     zona: string;
     id_solicitante: string;
     id_responsable?: string;
@@ -61,6 +61,7 @@ export interface OnUpdateTicketModel {
     cambioFechaCompromiso: boolean;
     motivo?:string
     cambioEstado?: boolean;
+    cambioZona?: boolean;
     id_usuario?:string
 }
 

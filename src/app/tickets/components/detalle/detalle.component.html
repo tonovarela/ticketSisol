@@ -1,4 +1,4 @@
-<div class=" h-auto mb-8 mt-2 space-y-4  mx-auto">
+<div class=" h-auto mb-8 mt-2 space-y-4  py-10 mx-auto">
     <h1 class="text-2xl">Folio {{ticket.id_ticket}}</h1>
     <div class="flex  flex-col sm:flex-row  ">
         <label for="estado" class="label-ticket ">Registro</label>
@@ -70,9 +70,25 @@
          disabled:border-0 
          disabled:bg-blue-gray-50"  />
     </div> -->
-    <div class="flex    flex-col sm:flex-row gap-1 ">
+    <!-- <div class="flex    flex-col sm:flex-row gap-1 ">
         <label for="zona" class="label-ticket">Zona</label>
         <input pInputText id="zona" class="w-full input-disabled" disabled [value]="ticket.zona" autocomplete="off" />
+    </div> -->
+    <div class="flex  flex-col sm:flex-row  ">
+        <label for="zonad" class="label-ticket ">Zona</label>        
+        <span class="w-full">
+            
+            <p-dropdown [options]="catalogoZonas" styleClass="text-sm uppercase min-w-full" 
+            [disabled]="!puedeEditar() || ticket.id_estado ==11  || ticket.id_estado ==9"
+            optionLabel="descripcion"
+                [(ngModel)]="ticket.id_zona" optionValue="id_zona">
+                <ng-template let-estado pTemplate="item">
+                    <div class="flex justify-items-start  p-0 ">
+                        <div class="text-xs ">{{ estado.descripcion}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+        </span>
     </div>
     <div class="flex   flex-col sm:flex-row mb-3">
         <label for="categoria" class="label-ticket ">Categoria</label>

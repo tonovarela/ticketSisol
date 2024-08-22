@@ -1,7 +1,7 @@
 
 import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { Mensaje, TipoMensaje } from '@interfaces/mensaje.interface';
-import { Bitacora, OnUpdateTicketModel, Ticket } from '@interfaces/ticket.interface';
+import { Bitacora, OnUpdateTicketModel, Ticket, Zona } from '@interfaces/ticket.interface';
 import { FireService } from '@services/firebase.service';
 import { TicketService } from '@services/ticket.service';
 import { UsuarioService } from '@services/usuario.service';
@@ -27,11 +27,13 @@ export class ListadoComponent implements OnInit {
   ticketsBkp: Ticket[] = [];
   id_ticketActivo: string | undefined;
   estados = this.ticketService.estados;
+  zonas= this.ticketService.zonas;
   id_usuario = "0";
   first = 0;
   rows = computed(() => this.ticketService.totalRows());
   ticketDetalle: Ticket | undefined;
   cargandoTickets = this.ticketService.cargando;
+   
   
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
@@ -44,7 +46,9 @@ export class ListadoComponent implements OnInit {
 puedeEditarTicket= signal<boolean>(false);
 
   ngOnInit(): void {
-    this.id_usuario = this.usuarioService.StateAuth().usuario?.id.toString() || "0";    
+    this.id_usuario = this.usuarioService.StateAuth().usuario?.id.toString() || "0";        
+   
+  
   }
 
 
@@ -108,10 +112,10 @@ puedeEditarTicket= signal<boolean>(false);
   }
 
   async actualizarTicket({ ticket, cambioFechaCompromiso,motivo }: OnUpdateTicketModel) {
-    const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;            
-    
-    if (cambioEstado || cambioFechaCompromiso) {        
-      await this.ticketService.actualizar({ticket,motivo:motivo||'',id_usuario:this.id_usuario,cambioFechaCompromiso,cambioEstado});
+    const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;   
+    const cambioZona= ticket.id_zona != this.ticketDetalle?.id_zona;         
+    if (cambioEstado || cambioFechaCompromiso || cambioZona) {        
+      await this.ticketService.actualizar({ticket,motivo:motivo||'',id_usuario:this.id_usuario,cambioFechaCompromiso,cambioEstado,cambioZona});
     }          
     this.cerrarDetalle();
     

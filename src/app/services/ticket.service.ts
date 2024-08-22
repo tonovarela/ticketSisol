@@ -12,13 +12,14 @@ export class TicketService {
   private tickets = signal<Ticket[]>([]);
   http = inject(HttpClient)
   estados = signal<Estado[]>([]);
+  zonas = signal<Zona[]>([]); 
 
 
   tipoUsuario = signal('3') ;  
 
   urlApi = environment.urlApi;
   categorias: Categoria[] = [];
-  zonas: Zona[] = [];
+  
   cargando = false;
   totalRows = signal(20);
   estadoFiltro = signal(-1);
@@ -39,7 +40,7 @@ export class TicketService {
 
       this.estados.set(catalogos.estados);
       this.categorias = catalogos.categorias;
-      this.zonas = catalogos.zonas;
+      this.zonas.set(catalogos.zonas);
     });
 
   }

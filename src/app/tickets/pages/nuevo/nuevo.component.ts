@@ -63,7 +63,7 @@ export class NuevoComponent implements OnInit {
     const id_solicitante = this.usuarioService.StateAuth().usuario?.id!;
     const ticket: Ticket = {
       id_solicitante: id_solicitante,
-      zona: this.zonas.find(z => z.id_zona.toString() == this.solicitudForm.get('id_zona')!.value!)?.descripcion!,
+      zona: this.zonas().find(z => z.id_zona.toString() == this.solicitudForm.get('id_zona')!.value!)?.descripcion!,
       id_categoria: this.solicitudForm.get('id_categoria')!.value!,
       id_zona: this.solicitudForm.get('id_zona')!.value!,
       descripcion: this.solicitudForm.get('descripcion')!.value!,
