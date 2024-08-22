@@ -71,13 +71,13 @@ export class TicketService {
   async actualizar(updateTicketModel:OnUpdateTicketModel) {
     try {
       const {ticket} =updateTicketModel
-      await firstValueFrom(this.http.patch(`${this.urlApi}/ticket`, {...updateTicketModel}));      
+      await firstValueFrom(this.http.patch(`${this.urlApi}/ticket/actualizar`, {...updateTicketModel}));      
       this.tickets.set(this.tickets().map(t => t.id_ticket === ticket.id_ticket ? ticket : t));
-    } catch (e) {
-      
+    } catch (e) {      
     }
-
   }
+
+  
 
   registrarNota(nota: {
     id_ticket: string,

@@ -20,6 +20,8 @@ import { CALENDAR_LANG_ES } from 'src/app/conf/locale';
 export class DetalleComponent implements OnInit {
   @Input('catalogoEstados') catalogoEstados: Estado[] = [];
   @Input('catalogoZonas') catalogoZonas: Zona[] = [];
+  @Input('esAdminUser') esAdminUser = false;
+  @Input('actualizandoTicket') actualizandoTicket = signal<boolean>(false);
   @Input('ticket') ticketParam!: Ticket;
   @Output('onClose') onClose = new EventEmitter<void>();
   @Input('puedeEditar') puedeEditar = signal<boolean>(false);
@@ -38,8 +40,7 @@ export class DetalleComponent implements OnInit {
   cambioFechaCompromiso = false;
   
 
-  ngOnInit(): void {
-    console.log(this.catalogoZonas);
+  ngOnInit(): void {    
     this.ticket = { ...this.ticketParam };
     if (this.ticket.fecha_respuesta != null  && !(this.ticket.fecha_respuesta instanceof Date)) {            
         const [year, month, day] = (this.ticket.fecha_respuesta as string).split('-').map(Number);

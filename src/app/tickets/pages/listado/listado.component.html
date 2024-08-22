@@ -109,8 +109,13 @@
     [breakpoints]="{'1320px':'70vw','1199px': '70vw', '700px': '70vw', '575px': '90vw' }" [style]="{ width: '20vw' }">
     
     
-    <app-detalle *ngIf="ticketDetalle" [puedeEditar]="puedeEditarTicket"  [catalogoEstados]="estados()" [ticket]="ticketDetalle"
-    [catalogoZonas]="zonas()"  
+    <app-detalle *ngIf="ticketDetalle"
+                  [esAdminUser]="esAdminUser()"
+                  [puedeEditar]="puedeEditarTicket" 
+                  [catalogoEstados]="estados()"
+                  [ticket]="ticketDetalle"
+                  [actualizandoTicket]="actualizandoTicket"
+                  [catalogoZonas]="zonas()"  
         (onClose)="cerrarDetalle()" (onUpdate)="actualizarTicket($event)">
     </app-detalle>
 </p-dialog>

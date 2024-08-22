@@ -33,6 +33,8 @@ export class ListadoComponent implements OnInit {
   rows = computed(() => this.ticketService.totalRows());
   ticketDetalle: Ticket | undefined;
   cargandoTickets = this.ticketService.cargando;
+  esAdminUser = computed(() => this.ticketService.tipoUsuario()=="1");
+  actualizandoTicket =signal<boolean>(false);
    
   
 
@@ -111,12 +113,16 @@ puedeEditarTicket= signal<boolean>(false);
     this.puedeEditarTicket.set(this.ticketService.tipoUsuario()=="1" || ticket.id_responsable==this.id_usuario);
   }
 
+  
+
   async actualizarTicket({ ticket, cambioFechaCompromiso,motivo }: OnUpdateTicketModel) {
     const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;   
+    this.actualizandoTicket.set(true);
     const cambioZona= ticket.id_zona != this.ticketDetalle?.id_zona;         
     if (cambioEstado || cambioFechaCompromiso || cambioZona) {        
       await this.ticketService.actualizar({ticket,motivo:motivo||'',id_usuario:this.id_usuario,cambioFechaCompromiso,cambioEstado,cambioZona});
     }          
+    this.actualizandoTicket.set(false);
     this.cerrarDetalle();
     
   }
