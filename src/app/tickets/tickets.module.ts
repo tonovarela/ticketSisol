@@ -20,6 +20,7 @@ import { MessagesComponent } from '../icons/messages/messages.component';
 import { DetalleComponent } from './components/detalle/detalle.component';
 import { SmileFaceComponent } from '../icons/smile-face/smile-face.component';
 import { BadFaceComponent } from '../icons/bad-face/bad-face.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
 
@@ -30,6 +31,7 @@ import { BadFaceComponent } from '../icons/bad-face/bad-face.component';
     LayoutComponent,
     ListadoComponent,
     NuevoComponent,
+    ReportesComponent,
 
   ],
   imports: [    

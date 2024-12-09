@@ -17,8 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   router = inject(Router)
   ngOnInit(): void {
     this.searchSubject.pipe(debounceTime(300)).subscribe((searchValue) => this.actualizarListado({ target: { value: searchValue } }, 'patron'));
-    this.router.events.subscribe((val) => {      
-      if (val instanceof NavigationEnd) {        
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
         this.mostrarFiltro = val.url === '/tickets/listado'
       }
 
@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   }
   ticketService = inject(TicketService);
+  
   estados = computed(() => this.ticketService.estados());
   usuarioService = inject(UsuarioService);
   inputText: string = '';
@@ -38,6 +39,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.searchSubject.complete();
+  }
+
+
+  irReportes() {
+    this.router.navigate(['/reportes']);
   }
 
   cerrarSesion() {

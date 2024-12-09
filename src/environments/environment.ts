@@ -1,6 +1,9 @@
 export const environment = {
     urlApi:"/sisol/api",    
     urlAuthService:"/lito/api",
+    baseURLDossier:"https://servicios.litoprocess.com/MicroStrategyLibrary",
+    usuarioDossier:"capitalh",
+    passwordDossier:"chu_mstr56&",
     googleEnvironment: {        
         apiKey:'AIzaSyAgRllSioGe9dTubfYl3HJQHdb3qkit-ao',
         authDomain: "login-aae3a.firebaseapp.com",

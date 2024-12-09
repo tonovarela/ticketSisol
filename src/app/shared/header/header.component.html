@@ -57,7 +57,7 @@
             class="h-full w-full fixed inset-0 cursor-default"></button>
             
         <div *ngIf="uiService.IsOpenMenu()" class="absolute w-32 z-50 bg-white rounded-lg shadow-lg py-2 mt-12">
-            <a  class="block px-4  account-link py-1 hover:text-white">{{usuario().username}}</a>
+            <a  class="block px-4  account-link py-1 hover:text-white">{{usuario().username}}</a>            
             <a (click)="usuarioService.closeSession()" class="block px-4 account-link py-1 cursor-pointer hover:text-white">Salir</a>
         </div>
 
@@ -140,8 +140,12 @@
             <i class="fas fa-sign-out-alt mr-3"></i>
             <app-avatar [url]="usuario().photoURL"  [username]="usuario().username" ></app-avatar>        
         </a>
+        <a  (click)="irReportes()" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">            
+            <i class="pi pi-chart-bar text-xs mr-3"></i>                
+            Reportes
+        </a>
         <a  (click)="cerrarSesion()" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-            <i class="fas fa-sign-out-alt mr-3"></i>
+            <i class="pi pi-sign-out mr-3"></i>
             Cerrar sesión
         </a>
     </nav>

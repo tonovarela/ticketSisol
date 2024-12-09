@@ -4,6 +4,7 @@ import { ListadoComponent } from './pages/listado/listado.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NuevoComponent } from './pages/nuevo/nuevo.component';
 import { BitacoraComponent } from './pages/bitacora/bitacora.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   children: [
     { path: 'listado', component: ListadoComponent },
     { path: 'nuevo', component: NuevoComponent },
+    { path: 'reportes', component: ReportesComponent },
     
     { path: '**', redirectTo: 'listado' }
   ]  
