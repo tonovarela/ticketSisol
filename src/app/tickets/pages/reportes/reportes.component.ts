@@ -14,7 +14,7 @@ export class ReportesComponent implements OnInit, AfterViewInit {
     const parameters1 = {
       BASE_URL: environment.baseURLDossier,
       projectID: '4144A4A74427236922F4B197856EB90B',
-      dossierId: "7296F1D14433F0669D5E8988B5E92BDF",
+      dossierId: "66B199A849FBC3385C9CDB82249D8A69",
       username: environment.usuarioDossier,
       password: environment.passwordDossier,
       idDossier: "dossierReportes"
