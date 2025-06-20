@@ -29,6 +29,7 @@
                 <th class="text-sm td-responsive  w-15">Registro</th>
                 <th class="text-sm td-responsive  w-15">Categoria</th>
                 <th class="text-sm td-responsive    w-15">Es queja?</th>
+                <th class="text-sm td-responsive    w-15">Riesgo</th>
                 <th class="text-sm  td-responsive  min-w-[150px]">Asignado</th>
                 <th class="text-sm td-responsive  w-1 z-40">Estado</th>
                 <th class="text-sm  td-responsive   min-w-[200px]">Compromiso</th>
@@ -66,6 +67,9 @@
                     }
 
                 </td>
+                <td class="text-xs td-responsive">
+                    {{ticket.riesgo}}
+                    </td>
                 <td class="text-xs td-responsive ">{{ ticket.asignado}}</td>
                 <td class="hidden lg:table-cell ">
 

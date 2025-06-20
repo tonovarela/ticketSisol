@@ -10,10 +10,12 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
+import { SelectButtonModule } from 'primeng/selectbutton';
 @NgModule({
+
     declarations: [],    
     providers: [],
-    exports: [ButtonModule,TableModule,SplitButtonModule,DropdownModule,DialogModule,ImageModule,InputTextModule,InputTextareaModule,CheckboxModule,ToastModule,CalendarModule]
+    exports: [ButtonModule,TableModule,SplitButtonModule,DropdownModule,DialogModule,ImageModule,InputTextModule,InputTextareaModule,CheckboxModule,ToastModule,CalendarModule,SelectButtonModule]
 })
 
 export class PrimeModule {

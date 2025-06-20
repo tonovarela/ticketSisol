@@ -18,6 +18,7 @@ export interface Ticket {
     situacion: string;
     id_estado: number;
     color?: string;
+    riesgo?: string;
 
 }
 

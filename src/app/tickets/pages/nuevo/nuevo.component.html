@@ -30,9 +30,27 @@
               text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-40 flex items-center p-3 text-sm rounded border" spellcheck="false" placeholder="Descripción"></textarea>
             <div [ngClass]="{'text-red-400': campoValido('descripcion')}"
                 class="count ml-auto text-gray-400 text-xs font-semibold">{{totalCaracteres}}/300</div>
-            <div class="flex  justify-start   space-x-3 mt-5 mb-10">
-                <p-checkbox formControlName="es_queja" [binary]="true" inputId="binary" />
-                <label class="text-sm text-gray-600" for="binary">Es queja?</label>
+
+
+
+                
+            
+            <div class="flex sm:flex-row flex-col  sm:justify-between justify-start   space-x-3 space-y-2 mt-5 mb-10">
+                <div class="flex items-center space-x-2 " >
+                    <p-checkbox formControlName="es_queja" [binary]="true" inputId="binary" />
+                    <label class="text-sm text-gray-600" for="binary">Es queja?</label>
+                </div>
+                <div class="flex justify-center items-center  space-x-1" [ngClass]="{'text-red-400': campoValido('riesgo')}">
+                    <label>Riesgo</label>                    
+                    <p-selectButton 
+                    [allowEmpty]="false"
+                    formControlName="riesgo" 
+                    [options]="catalogoRiesgos"                     
+                    optionValue="label" 
+                    optionLabel="label">                    
+                </p-selectButton>
+                </div>
+                
             </div>
             @if (previewUrl){
             <div id="preview"
@@ -97,8 +115,10 @@
     </form>
 </div>
 
-
-
 <!-- <pre>
-    {{solicitudForm.value | json}}
+    {{ solicitudForm.value | json }}
+</pre>
+
+<pre>
+    {{riesgoSeleccionado }}
 </pre> -->

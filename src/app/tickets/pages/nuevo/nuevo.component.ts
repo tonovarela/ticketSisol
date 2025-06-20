@@ -29,6 +29,16 @@ export class NuevoComponent implements OnInit {
   usuarioService = inject(UsuarioService);
   router = inject(Router);
 
+
+
+  riesgoSeleccionado: any;
+
+  catalogoRiesgos: any[] = [
+      { label:"Alto",color:"red",icon: 'pi pi-circle-fill text-pink-600' },
+      { label:"Medio",color:"yellow",icon: 'pi pi-circle-fill text-yellow-600' },
+      { label:"Bajo",color:"green",icon: 'pi pi-circle-fill text-green-600' }      
+  ];
+
   ngOnInit(): void {
   }
 
@@ -42,6 +52,7 @@ export class NuevoComponent implements OnInit {
     id_zona: new FormControl('', [Validators.required]),
     id_categoria: new FormControl('', [Validators.required]),
     titulo: new FormControl('', [Validators.required]),
+    riesgo: new FormControl('', [Validators.required]),
     descripcion: new FormControl('', [Validators.required, Validators.maxLength(300)]),
     es_queja: new FormControl(false),
 
@@ -59,7 +70,7 @@ export class NuevoComponent implements OnInit {
     this.solicitudForm.markAllAsTouched();
     if (this.solicitudForm.invalid) {
       return;
-    }
+    }    
     const id_solicitante = this.usuarioService.StateAuth().usuario?.id!;
     const ticket: Ticket = {
       id_solicitante: id_solicitante,
@@ -73,6 +84,7 @@ export class NuevoComponent implements OnInit {
       categoria: this.categorias.find(c => c.id_categoria.toString() == this.solicitudForm.get('id_categoria')!.value!)?.descripcion!,
       es_queja: this.solicitudForm.get('es_queja')!.value!,
       situacion: 'En proceso',
+      riesgo: this.solicitudForm.get('riesgo')!.value!.toUpperCase(),
       id_estado: 3,
     };
     this.solicitudForm.disable();
