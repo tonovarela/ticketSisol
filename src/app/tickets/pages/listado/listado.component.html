@@ -68,7 +68,16 @@
 
                 </td>
                 <td class="text-xs td-responsive">
-                    {{ticket.riesgo}}
+                    <div class=" text-white  rounded-md text-center p-1" 
+          [ngClass]="{
+            'bg-red-600': ticket.riesgo === 'ALTO',
+            'bg-yellow-600': ticket.riesgo === 'MEDIO',
+            'bg-green-600': ticket.riesgo === 'BAJO',
+            'bg-slate-600': ticket.riesgo === null
+          }">
+        {{ticket.riesgo ?? '..'}}
+        </div>
+                    
                     </td>
                 <td class="text-xs td-responsive ">{{ ticket.asignado}}</td>
                 <td class="hidden lg:table-cell ">

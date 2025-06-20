@@ -123,6 +123,8 @@ puedeEditarTicket= signal<boolean>(false);
       await this.ticketService.actualizar({ticket,motivo:motivo||'',id_usuario:this.id_usuario,cambioFechaCompromiso,cambioEstado,cambioZona});
     }          
     this.actualizandoTicket.set(false);
+    const id_estado = this.ticketService.estadoFiltro();
+    this.ticketService.cargarTickets(this.id_usuario, id_estado);
     this.cerrarDetalle();
     
   }
