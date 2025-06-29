@@ -119,9 +119,10 @@ puedeEditarTicket= signal<boolean>(false);
     const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;   
     this.actualizandoTicket.set(true);
     const cambioZona= ticket.id_zona != this.ticketDetalle?.id_zona;         
-    if (cambioEstado || cambioFechaCompromiso || cambioZona) {        
+    const cambioRiesgo = ticket.riesgo != this.ticketDetalle?.riesgo;
+    if (cambioEstado || cambioFechaCompromiso || cambioZona || cambioRiesgo ) {              
       await this.ticketService.actualizar({ticket,motivo:motivo||'',id_usuario:this.id_usuario,cambioFechaCompromiso,cambioEstado,cambioZona});
-    }          
+    } 
     this.actualizandoTicket.set(false);
     const id_estado = this.ticketService.estadoFiltro();
     this.ticketService.cargarTickets(this.id_usuario, id_estado);

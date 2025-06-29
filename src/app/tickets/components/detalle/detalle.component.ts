@@ -28,6 +28,12 @@ export class DetalleComponent implements OnInit {
   @Output('onUpdate') onUpdate = new EventEmitter<OnUpdateTicketModel>();
   @ViewChild('motivo') motivo:any;
 
+  catalogoRiesgos: any[] = [    
+    { label:"Alto" },
+    { label:"Medio" },
+    { label:"Bajo" }      
+];
+
 
   localeCalendar = CALENDAR_LANG_ES;
   esFechaRequerida = false;
@@ -36,11 +42,13 @@ export class DetalleComponent implements OnInit {
   today = new Date();
   ticket!: Ticket;
   estados = signal<Estado[]>([]);
+  riesgos = signal<string[]>([]);
   isMobile = isMobile();
   cambioFechaCompromiso = false;
   
 
   ngOnInit(): void {    
+    
     this.ticket = { ...this.ticketParam };
     if (this.ticket.fecha_respuesta != null  && !(this.ticket.fecha_respuesta instanceof Date)) {            
         const [year, month, day] = (this.ticket.fecha_respuesta as string).split('-').map(Number);
@@ -74,7 +82,7 @@ export class DetalleComponent implements OnInit {
       this.esFechaRequerida = true
       return;
     }
-    const motivoRef = this.motivo;    
+    const motivoRef = this.motivo;        
     this.onUpdate.emit({
       ticket: this.ticket,
       cambioFechaCompromiso: this.cambioFechaCompromiso,
