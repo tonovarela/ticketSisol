@@ -29,9 +29,9 @@ export class DetalleComponent implements OnInit {
   @ViewChild('motivo') motivo:any;
 
   catalogoRiesgos: any[] = [    
-    { label:"Alto" },
-    { label:"Medio" },
-    { label:"Bajo" }      
+    { label:"ALTO" },
+    { label:"MEDIO" },
+    { label:"BAJO" }      
 ];
 
 

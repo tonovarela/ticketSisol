@@ -115,7 +115,7 @@ puedeEditarTicket= signal<boolean>(false);
 
   
 
-  async actualizarTicket({ ticket, cambioFechaCompromiso,motivo }: OnUpdateTicketModel) {
+  async actualizarTicket({ ticket, cambioFechaCompromiso,motivo }: OnUpdateTicketModel) {            
     const cambioEstado = ticket.id_estado != this.ticketDetalle?.id_estado;   
     this.actualizandoTicket.set(true);
     const cambioZona= ticket.id_zona != this.ticketDetalle?.id_zona;         
